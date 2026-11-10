@@ -1,0 +1,2764 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DehqonBozor Online — Daladan dasturxonga, vositachilarsiz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #FAF8F5;
+      --bg-soft: #F2EFE9;
+      --card: #FFFFFF;
+      --text: #18241B;
+      --muted: #627066;
+      --line: #E5E2DC;
+      --emerald: #136F43;
+      --emerald-dark: #0D5231;
+      --emerald-deep: #093520;
+      --emerald-light: #E6F4EC;
+      --harvest: #F59E0B;
+      --harvest-light: #FEF3C7;
+      --terracotta: #E05A47;
+      --blue: #1D58B8;
+      --blue-light: #E6EEF9;
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --shadow-sm: 0 4px 16px rgba(19, 42, 29, 0.05);
+      --shadow-md: 0 14px 34px rgba(19, 42, 29, 0.08);
+      --shadow-lg: 0 24px 56px rgba(19, 42, 29, 0.14);
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    [data-theme="dark"] {
+      --bg: #0D1510;
+      --bg-soft: #131F18;
+      --card: #18271E;
+      --text: #F0F5F1;
+      --muted: #95A79B;
+      --line: #263B2E;
+      --emerald: #22C55E;
+      --emerald-dark: #16A34A;
+      --emerald-deep: #062314;
+      --emerald-light: #1A3525;
+      --harvest-light: #362A12;
+      --blue-light: #162844;
+      --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.25);
+      --shadow-md: 0 14px 34px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 24px 56px rgba(0, 0, 0, 0.6);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body {
+      margin: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 14.5px;
+      line-height: 1.55;
+      transition: background 0.3s, color 0.3s;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, .serif-title {
+      font-family: 'Fraunces', serif;
+      letter-spacing: -0.02em;
+      margin-top: 0;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; color: inherit; }
+    button { cursor: pointer; border: none; background: none; }
+
+    .container { width: min(1240px, calc(100% - 40px)); margin: 0 auto; }
+    .hidden-page { display: none !important; }
+
+    /* Top ticker bar */
+    .top-ticker {
+      background: var(--emerald-deep);
+      color: #D9F2E4;
+      font-size: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .ticker-inner {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .ticker-live {
+      display: inline-flex; align-items: center; gap: 8px; font-weight: 600;
+    }
+    .pulse-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: #4ADE80;
+      box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7);
+      animation: pulse 1.8s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); }
+      70% { box-shadow: 0 0 0 8px rgba(74, 222, 128, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+    }
+    .ticker-right { display: flex; align-items: center; gap: 16px; }
+    .cashback-wallet {
+      background: rgba(245, 158, 11, 0.2);
+      border: 1px solid rgba(245, 158, 11, 0.45);
+      color: #FCD34D;
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-weight: 700;
+      font-size: 11.5px;
+    }
+
+    /* Header */
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(250, 248, 245, 0.86);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+      transition: background 0.3s;
+    }
+    [data-theme="dark"] .site-header {
+      background: rgba(13, 21, 16, 0.86);
+    }
+    .header-row {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; min-height: 78px;
+    }
+    .brand {
+      display: inline-flex; align-items: center; gap: 11px; flex-shrink: 0; cursor: pointer;
+    }
+    .brand-icon {
+      width: 44px; height: 44px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--emerald), #0A4628);
+      color: #fff; font-size: 22px; display: grid; place-items: center;
+      box-shadow: 0 8px 18px rgba(19, 111, 67, 0.25);
+    }
+    .brand-name {
+      font-family: 'Fraunces', serif;
+      font-size: 21px; font-weight: 800; line-height: 1;
+    }
+    .brand-name span { color: var(--emerald); }
+    .brand-name small {
+      display: block; font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 9px; font-weight: 800; letter-spacing: 2.2px;
+      color: var(--muted); margin-top: 4px;
+    }
+
+    /* Search */
+    .smart-search {
+      flex: 1; max-width: 460px;
+      display: flex; align-items: center; gap: 6px;
+      background: var(--card); border: 1.5px solid var(--line);
+      border-radius: 99px; padding: 5px 6px 5px 14px;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .smart-search:focus-within {
+      border-color: var(--emerald);
+      box-shadow: 0 0 0 4px var(--emerald-light);
+    }
+    .smart-search input {
+      flex: 1; min-width: 80px; border: 0; outline: 0; background: transparent;
+      font-size: 13px;
+    }
+    .smart-search select {
+      border: 0; border-left: 1px solid var(--line);
+      background: transparent; padding: 6px 8px;
+      font-size: 12px; font-weight: 600; color: var(--muted); outline: 0;
+    }
+    .mic-btn {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--emerald-light); color: var(--emerald);
+      display: grid; place-items: center; font-size: 14px; transition: .2s;
+    }
+    .mic-btn:hover { background: var(--emerald); color: #fff; }
+    .search-go {
+      background: var(--emerald); color: #fff;
+      padding: 8px 16px; border-radius: 99px;
+      font-size: 12px; font-weight: 700; transition: .2s;
+    }
+    .search-go:hover { background: var(--emerald-dark); }
+
+    /* Header Actions */
+    .header-actions { display: flex; align-items: center; gap: 8px; }
+    .act-pill {
+      display: inline-flex; align-items: center; gap: 7px;
+      height: 40px; padding: 0 14px; border-radius: 99px;
+      background: var(--card); border: 1px solid var(--line);
+      font-size: 12px; font-weight: 700;
+      box-shadow: var(--shadow-sm); transition: .2s var(--ease);
+      white-space: nowrap;
+    }
+    .act-pill:hover {
+      border-color: var(--emerald); transform: translateY(-2px);
+    }
+    .act-pill.farmer-cta {
+      background: var(--harvest-light); border-color: rgba(245, 158, 11, 0.35);
+      color: #B45309;
+    }
+    .act-pill.customer-cta {
+      background: var(--emerald-light); border-color: rgba(19, 111, 67, 0.25);
+      color: var(--emerald);
+    }
+    .act-pill.active-page {
+      background: var(--emerald) !important; color: #fff !important; border-color: var(--emerald) !important;
+    }
+    [data-theme="dark"] .act-pill.farmer-cta { color: #FBBF24; }
+    .act-pill.cart-pill {
+      background: var(--emerald); color: #fff; border-color: var(--emerald);
+    }
+    .act-pill.cart-pill:hover { background: var(--emerald-dark); }
+    .cart-badge {
+      background: #fff; color: var(--emerald-deep);
+      font-size: 11px; font-weight: 800;
+      padding: 2px 7px; border-radius: 99px;
+    }
+    .icon-round {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--card); border: 1px solid var(--line);
+      display: grid; place-items: center; font-size: 16px;
+      box-shadow: var(--shadow-sm); transition: .2s;
+    }
+    .icon-round:hover { border-color: var(--emerald); transform: translateY(-2px); }
+
+    /* Subnav */
+    .subnav {
+      border-top: 1px solid var(--line);
+      background: var(--card);
+    }
+    .subnav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 18px; min-height: 46px; overflow-x: auto; scrollbar-width: none;
+    }
+    .subnav-links { display: flex; align-items: center; gap: 22px; white-space: nowrap; }
+    .subnav-links a {
+      font-size: 13px; font-weight: 600; color: var(--muted);
+      padding: 10px 0; transition: color .2s;
+    }
+    .subnav-links a:hover { color: var(--emerald); }
+    .subnav-perk {
+      font-size: 12px; font-weight: 700; color: var(--emerald); white-space: nowrap;
+    }
+
+    /* ==========================================
+       SEPARATE PAGES: FERMER & XARIDOR PORTALLARI
+       ========================================== */
+    .portal-page-wrap {
+      min-height: calc(100vh - 140px);
+      padding: 34px 0 70px;
+      animation: fadePage 0.35s var(--ease);
+    }
+    @keyframes fadePage {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .portal-topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; flex-wrap: wrap; margin-bottom: 28px;
+      padding-bottom: 18px; border-bottom: 1px solid var(--line);
+    }
+    .back-market-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 18px; border-radius: 99px;
+      background: var(--card); border: 1px solid var(--line);
+      font-size: 13px; font-weight: 700; box-shadow: var(--shadow-sm);
+      transition: .2s;
+    }
+    .back-market-btn:hover {
+      border-color: var(--emerald); color: var(--emerald); transform: translateX(-3px);
+    }
+
+    /* Auth Layout (Login / Register) */
+    .portal-auth-layout {
+      display: grid; grid-template-columns: 1.05fr 0.95fr;
+      gap: 32px; align-items: stretch;
+    }
+    .portal-promo-panel {
+      background:
+        radial-gradient(circle at 85% 15%, rgba(245, 158, 11, 0.22), transparent 45%),
+        linear-gradient(135deg, #093520 0%, #136F43 100%);
+      color: #fff;
+      border-radius: var(--radius-xl);
+      padding: 46px 42px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      box-shadow: var(--shadow-lg);
+      position: relative; overflow: hidden;
+    }
+    .portal-promo-panel.customer-theme {
+      background:
+        radial-gradient(circle at 85% 15%, rgba(56, 189, 248, 0.22), transparent 45%),
+        linear-gradient(135deg, #0F2942 0%, #136F43 100%);
+    }
+    .portal-promo-panel h1 {
+      font-size: clamp(30px, 3.6vw, 44px);
+      line-height: 1.1; color: #fff; margin: 14px 0 16px;
+    }
+    .portal-promo-panel p {
+      color: rgba(255,255,255,0.86); font-size: 15px; line-height: 1.7;
+    }
+    .portal-perks-list {
+      display: grid; gap: 16px; margin: 26px 0;
+    }
+    .portal-perk-item {
+      display: flex; align-items: flex-start; gap: 14px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      padding: 15px 18px; border-radius: 18px;
+      backdrop-filter: blur(8px);
+    }
+    .portal-perk-icon {
+      width: 42px; height: 42px; border-radius: 12px;
+      background: rgba(255,255,255,0.16); display: grid; place-items: center;
+      font-size: 20px; flex-shrink: 0;
+    }
+    .portal-perk-item b { display: block; font-size: 14.5px; margin-bottom: 3px; color: #FDE68A; }
+    .portal-perk-item small { color: rgba(255,255,255,0.82); font-size: 12.5px; line-height: 1.5; }
+
+    .portal-auth-card {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: var(--radius-xl); padding: 38px 36px;
+      box-shadow: var(--shadow-md);
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .auth-tabs {
+      display: grid; grid-template-columns: 1fr 1fr;
+      background: var(--bg-soft); padding: 5px;
+      border-radius: 99px; margin-bottom: 26px;
+      border: 1px solid var(--line);
+    }
+    .auth-tab-btn {
+      padding: 12px 16px; border-radius: 99px;
+      font-size: 13.5px; font-weight: 800; color: var(--muted);
+      transition: .2s;
+    }
+    .auth-tab-btn.active {
+      background: var(--emerald); color: #fff;
+      box-shadow: 0 6px 16px rgba(19, 111, 67, 0.25);
+    }
+    .auth-demo-box {
+      margin-top: 18px; padding: 12px 15px;
+      background: var(--emerald-light); border-radius: 14px;
+      font-size: 12px; color: var(--text);
+      display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+    }
+
+    /* Dashboard Full-Page Layout */
+    .portal-dash-layout {
+      display: grid; grid-template-columns: 270px 1fr; gap: 26px; align-items: start;
+    }
+    .portal-sidebar {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: var(--radius-xl); padding: 24px 18px;
+      box-shadow: var(--shadow-sm); position: sticky; top: 96px;
+    }
+    .portal-profile-mini {
+      text-align: center; padding: 10px 10px 20px;
+      border-bottom: 1px solid var(--line); margin-bottom: 16px;
+    }
+    .portal-avatar-lg {
+      width: 68px; height: 68px; border-radius: 22px;
+      background: linear-gradient(135deg, var(--emerald), #093520);
+      color: #fff; font-size: 32px; display: grid; place-items: center;
+      margin: 0 auto 12px; box-shadow: 0 10px 22px rgba(19,111,67,0.25);
+    }
+    .portal-verified-pill {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: var(--emerald-light); color: var(--emerald);
+      font-size: 11px; font-weight: 800; padding: 4px 10px;
+      border-radius: 99px; margin-top: 6px;
+    }
+    .portal-nav-list { display: grid; gap: 6px; }
+    .portal-nav-btn {
+      display: flex; align-items: center; gap: 12px;
+      width: 100%; padding: 12px 15px; border-radius: 14px;
+      font-size: 13.5px; font-weight: 700; color: var(--muted);
+      text-align: left; transition: .2s;
+    }
+    .portal-nav-btn:hover { background: var(--bg-soft); color: var(--text); }
+    .portal-nav-btn.active {
+      background: var(--emerald); color: #fff;
+      box-shadow: 0 8px 18px rgba(19, 111, 67, 0.22);
+    }
+    .portal-nav-btn.logout-btn {
+      margin-top: 14px; color: var(--terracotta);
+      border-top: 1px solid var(--line); border-radius: 0; padding-top: 18px;
+    }
+
+    .portal-main-panel { display: grid; gap: 24px; }
+    .dash-banner {
+      background: linear-gradient(125deg, #093520, #136F43);
+      color: #fff; border-radius: var(--radius-xl);
+      padding: 32px 34px; display: flex; align-items: center;
+      justify-content: space-between; gap: 20px; flex-wrap: wrap;
+      box-shadow: var(--shadow-md);
+    }
+    .dash-banner h2 { color: #fff; margin: 4px 0 6px; font-size: 28px; }
+    .dash-banner p { margin: 0; color: rgba(255,255,255,0.82); font-size: 13.5px; }
+
+    .dash-stats-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+    }
+    .dash-stat-card {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: var(--radius-lg); padding: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+    .dash-stat-card small {
+      display: block; font-size: 12px; font-weight: 700; color: var(--muted); margin-bottom: 8px;
+    }
+    .dash-stat-card strong {
+      font-family: 'Fraunces', serif; font-size: 26px; color: var(--text);
+    }
+    .dash-stat-card span {
+      display: inline-block; margin-top: 6px; font-size: 11px; font-weight: 700; color: var(--emerald);
+    }
+
+    .dash-card-box {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: var(--radius-xl); padding: 28px;
+      box-shadow: var(--shadow-sm);
+    }
+    .dash-table {
+      width: 100%; border-collapse: collapse; font-size: 13.5px;
+    }
+    .dash-table th, .dash-table td {
+      padding: 13px 12px; text-align: left; border-bottom: 1px solid var(--line);
+    }
+    .dash-table th {
+      font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--muted);
+    }
+    .dash-table img {
+      width: 48px; height: 48px; border-radius: 10px; object-fit: cover; vertical-align: middle; margin-right: 10px;
+    }
+    .btn-danger-sm {
+      background: rgba(224, 90, 71, 0.12); color: var(--terracotta);
+      padding: 7px 12px; border-radius: 99px; font-size: 11.5px; font-weight: 800;
+    }
+    .btn-danger-sm:hover { background: var(--terracotta); color: #fff; }
+
+    /* HERO BENTO GRID */
+    .hero-section { padding: 28px 0 36px; }
+    .bento-hero {
+      display: grid;
+      grid-template-columns: 1.35fr 0.65fr;
+      gap: 20px;
+    }
+    .bento-main {
+      background:
+        radial-gradient(circle at 85% 20%, rgba(245, 158, 11, 0.18), transparent 45%),
+        linear-gradient(130deg, #093520 0%, #136F43 100%);
+      border-radius: var(--radius-xl);
+      padding: 48px 44px;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 450px;
+      box-shadow: var(--shadow-lg);
+    }
+    .bento-main-content { position: relative; z-index: 2; max-width: 520px; }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(8px);
+      padding: 6px 14px; border-radius: 99px;
+      font-size: 11.5px; font-weight: 700; letter-spacing: 0.5px;
+      margin-bottom: 20px; color: #A7F3D0;
+    }
+    .bento-main h1 {
+      font-size: clamp(34px, 4.2vw, 54px);
+      line-height: 1.07; margin-bottom: 18px; color: #fff;
+    }
+    .bento-main h1 em {
+      font-style: italic; color: #FDE68A; font-weight: 700;
+    }
+    .bento-main p {
+      font-size: 15px; color: rgba(255, 255, 255, 0.86);
+      line-height: 1.7; margin-bottom: 28px;
+    }
+    .hero-btns { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn-gold {
+      background: var(--harvest); color: #18241B;
+      padding: 14px 26px; border-radius: 99px;
+      font-weight: 800; font-size: 13.5px;
+      box-shadow: 0 10px 24px rgba(245, 158, 11, 0.35);
+      transition: transform .2s, background .2s;
+    }
+    .btn-gold:hover { background: #FBBF24; transform: translateY(-2px); }
+    .btn-glass {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      color: #fff; padding: 14px 24px; border-radius: 99px;
+      font-weight: 700; font-size: 13.5px; backdrop-filter: blur(6px);
+      transition: .2s;
+    }
+    .btn-glass:hover { background: rgba(255, 255, 255, 0.22); }
+
+    .bento-main-img {
+      position: absolute; right: -30px; bottom: -30px;
+      width: 320px; height: 320px; border-radius: 50%;
+      object-fit: cover; border: 8px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+    }
+    .bento-metrics {
+      position: relative; z-index: 2;
+      display: flex; gap: 26px; flex-wrap: wrap;
+      margin-top: 36px; padding-top: 22px;
+      border-top: 1px solid rgba(255, 255, 255, 0.16);
+    }
+    .bento-metric b {
+      display: block; font-family: 'Fraunces', serif; font-size: 22px; color: #FDE68A;
+    }
+    .bento-metric small { font-size: 11.5px; color: rgba(255,255,255,0.78); }
+
+    .bento-side {
+      display: grid; grid-template-rows: 1fr 1fr; gap: 20px;
+    }
+    .bento-card {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: var(--radius-xl); padding: 26px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+    }
+    .bento-card.deal-card {
+      background: linear-gradient(135deg, var(--harvest-light), var(--card));
+    }
+    .deal-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--terracotta); color: #fff;
+      font-size: 11px; font-weight: 800; padding: 5px 11px;
+      border-radius: 99px; width: fit-content;
+    }
+    .bento-card h3 { font-size: 22px; margin: 10px 0 6px; }
+    .bento-card p { font-size: 13px; color: var(--muted); margin: 0 0 14px; }
+    .deal-price-row {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    }
+    .deal-price b { font-size: 20px; font-weight: 800; color: var(--emerald); }
+    .deal-price del { font-size: 12px; color: var(--muted); margin-left: 6px; }
+
+    /* STORIES BAR */
+    .stories-strip { padding: 14px 0 32px; }
+    .stories-head {
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;
+    }
+    .stories-head span {
+      font-size: 12px; font-weight: 800; letter-spacing: 1px; color: var(--emerald); text-transform: uppercase;
+    }
+    .stories-row {
+      display: flex; gap: 16px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none;
+    }
+    .story-pill {
+      display: flex; align-items: center; gap: 12px;
+      background: var(--card); border: 1px solid var(--line);
+      padding: 8px 16px 8px 8px; border-radius: 99px;
+      min-width: 220px; box-shadow: var(--shadow-sm);
+      transition: transform .2s, border-color .2s;
+      cursor: pointer;
+    }
+    .story-pill:hover { transform: translateY(-3px); border-color: var(--emerald); }
+    .story-avatar {
+      width: 48px; height: 48px; border-radius: 50%;
+      padding: 2px; background: linear-gradient(45deg, var(--emerald), var(--harvest));
+      flex-shrink: 0;
+    }
+    .story-avatar img {
+      width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
+      border: 2px solid var(--card);
+    }
+    .story-meta b { display: block; font-size: 13px; }
+    .story-meta small { font-size: 11px; color: var(--emerald); font-weight: 700; }
+
+    /* SECTION HEADINGS */
+    .section { padding: 56px 0; }
+    .sec-top {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      gap: 20px; flex-wrap: wrap; margin-bottom: 28px;
+    }
+    .sec-kicker {
+      display: inline-block; font-size: 11.5px; font-weight: 800;
+      letter-spacing: 1.4px; text-transform: uppercase;
+      color: var(--emerald); margin-bottom: 8px;
+    }
+    .sec-top h2 { font-size: clamp(26px, 3.2vw, 38px); margin: 0; }
+    .sec-top p { color: var(--muted); margin: 6px 0 0; font-size: 14px; }
+
+    /* CATEGORY PILLS + CONTROLS */
+    .cat-bar {
+      display: flex; gap: 10px; overflow-x: auto; padding-bottom: 12px; margin-bottom: 22px;
+      scrollbar-width: none;
+    }
+    .cat-chip {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 18px; border-radius: 99px;
+      background: var(--card); border: 1px solid var(--line);
+      font-size: 13px; font-weight: 700; white-space: nowrap;
+      box-shadow: var(--shadow-sm); transition: .2s;
+    }
+    .cat-chip:hover, .cat-chip.active {
+      background: var(--emerald); color: #fff; border-color: var(--emerald);
+      transform: translateY(-2px);
+    }
+
+    .catalog-toolbar {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 14px; flex-wrap: wrap; margin-bottom: 22px;
+      padding: 14px 18px; background: var(--card);
+      border: 1px solid var(--line); border-radius: var(--radius-md);
+    }
+    .toolbar-filters {
+      display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    }
+    .toolbar-filters select, .toolbar-filters input {
+      border: 1px solid var(--line); background: var(--bg);
+      padding: 8px 12px; border-radius: 10px; font-size: 12.5px; font-weight: 600;
+    }
+
+    /* PRODUCT CARDS GRID */
+    .product-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+    }
+    .p-card {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: var(--radius-lg); overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: transform .28s var(--ease), box-shadow .28s var(--ease), border-color .2s;
+    }
+    .p-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--emerald);
+    }
+    .p-media {
+      height: 195px; position: relative; overflow: hidden; background: var(--emerald-light);
+      cursor: pointer;
+    }
+    .p-media img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .5s var(--ease);
+    }
+    .p-card:hover .p-media img { transform: scale(1.06); }
+    .p-badge {
+      position: absolute; top: 12px; left: 12px;
+      background: rgba(9, 53, 32, 0.86); backdrop-filter: blur(6px);
+      color: #A7F3D0; padding: 5px 11px; border-radius: 99px;
+      font-size: 10.5px; font-weight: 800;
+    }
+    .p-cashback {
+      position: absolute; bottom: 10px; left: 12px;
+      background: var(--harvest); color: #18241B;
+      padding: 4px 9px; border-radius: 99px;
+      font-size: 10px; font-weight: 800;
+    }
+    .p-fav {
+      position: absolute; top: 12px; right: 12px;
+      width: 34px; height: 34px; border-radius: 50%;
+      background: rgba(255,255,255,0.92); color: #475569;
+      display: grid; place-items: center; font-size: 16px;
+      transition: transform .2s; z-index: 2;
+    }
+    .p-fav.liked { color: var(--terracotta); }
+    .p-fav:hover { transform: scale(1.1); }
+
+    .p-body {
+      padding: 16px; display: flex; flex-direction: column; flex: 1;
+    }
+    .p-farmer {
+      font-size: 11.5px; color: var(--muted); font-weight: 600;
+      display: flex; align-items: center; gap: 5px; margin-bottom: 5px;
+    }
+    .p-farmer b { color: var(--emerald); }
+    .p-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 16px; font-weight: 800; margin: 0 0 8px;
+      cursor: pointer;
+    }
+    .p-title:hover { color: var(--emerald); }
+
+    /* Location & Stock Chips on Card */
+    .p-info-pills {
+      display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px;
+    }
+    .p-pill-loc {
+      font-size: 11px; font-weight: 700;
+      background: var(--bg-soft); color: var(--text);
+      padding: 4px 9px; border-radius: 8px;
+      display: inline-flex; align-items: center; gap: 4px;
+    }
+    .p-pill-stock {
+      font-size: 11px; font-weight: 800;
+      background: var(--emerald-light); color: var(--emerald);
+      padding: 4px 9px; border-radius: 8px;
+      display: inline-flex; align-items: center; gap: 4px;
+    }
+
+    .p-foot {
+      margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line);
+      display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    }
+    .p-price {
+      font-size: 17px; font-weight: 800; color: var(--text);
+    }
+    .p-price small { font-size: 11.5px; font-weight: 500; color: var(--muted); }
+    .p-add {
+      background: var(--emerald-light); color: var(--emerald);
+      padding: 9px 14px; border-radius: 99px;
+      font-size: 12px; font-weight: 800; transition: .2s;
+    }
+    .p-add:hover { background: var(--emerald); color: #fff; }
+
+    /* Product Detail Modal Enhanced Styles */
+    .detail-grid-box {
+      display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 24px; align-items: start;
+    }
+    .detail-loc-stock-box {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 14px 0;
+    }
+    .detail-info-card {
+      background: var(--bg-soft); border: 1px solid var(--line);
+      border-radius: 14px; padding: 12px 14px;
+    }
+    .detail-info-card small {
+      display: block; font-size: 11px; font-weight: 700; color: var(--muted); margin-bottom: 4px;
+    }
+    .detail-info-card b {
+      font-size: 13.5px; color: var(--text); display: block;
+    }
+    .farmer-call-box {
+      background: var(--emerald-light);
+      border: 1.5px solid rgba(19, 111, 67, 0.28);
+      border-radius: 18px; padding: 16px; margin: 16px 0;
+    }
+    .farmer-call-top {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px;
+    }
+    .call-now-btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; padding: 13px 18px; border-radius: 99px;
+      background: var(--emerald); color: #fff;
+      font-size: 14px; font-weight: 800;
+      box-shadow: 0 8px 20px rgba(19, 111, 67, 0.28);
+      transition: .2s;
+    }
+    .call-now-btn:hover { background: var(--emerald-dark); transform: translateY(-1px); }
+
+    /* SUBSCRIPTION BUNDLES */
+    .bundles-section {
+      background: var(--bg-soft);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .bundle-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
+    }
+    .bundle-card {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: var(--radius-xl); padding: 28px;
+      display: flex; flex-direction: column;
+      box-shadow: var(--shadow-sm); position: relative;
+      transition: transform .25s, box-shadow .25s;
+    }
+    .bundle-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+    .bundle-card.popular { border: 2px solid var(--emerald); }
+    .bundle-save {
+      position: absolute; top: 20px; right: 20px;
+      background: var(--emerald-light); color: var(--emerald);
+      font-size: 11px; font-weight: 800; padding: 5px 11px; border-radius: 99px;
+    }
+    .bundle-icon { font-size: 34px; margin-bottom: 12px; }
+    .bundle-card h3 { font-size: 22px; margin-bottom: 6px; }
+    .bundle-card p { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+    .bundle-items {
+      list-style: none; padding: 0; margin: 0 0 22px;
+      display: grid; gap: 8px; font-size: 13px; flex: 1;
+    }
+    .bundle-items li::before { content: "✓ "; color: var(--emerald); font-weight: 800; }
+    .bundle-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 16px; border-top: 1px solid var(--line);
+    }
+    .bundle-bottom strong { font-size: 20px; color: var(--emerald); }
+
+    /* 1-CLICK RECIPE TO CART */
+    .recipe-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px;
+    }
+    .recipe-card {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: var(--radius-xl); overflow: hidden;
+      display: grid; grid-template-columns: 0.9fr 1.1fr;
+      box-shadow: var(--shadow-sm);
+    }
+    .recipe-img { width: 100%; height: 100%; min-height: 220px; object-fit: cover; }
+    .recipe-info { padding: 26px; display: flex; flex-direction: column; justify-content: space-between; }
+    .recipe-info h3 { font-size: 22px; margin: 6px 0 8px; }
+    .recipe-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 18px; }
+    .recipe-tags span {
+      font-size: 11px; font-weight: 700; padding: 4px 10px;
+      border-radius: 99px; background: var(--bg-soft); color: var(--text);
+    }
+
+    /* WHOLESALE / TENDER BOARD */
+    .tender-box {
+      background: linear-gradient(125deg, #093520, #136F43);
+      color: #fff; border-radius: var(--radius-xl);
+      padding: 40px; display: grid; grid-template-columns: 1.1fr 0.9fr;
+      gap: 30px; align-items: center; box-shadow: var(--shadow-lg);
+    }
+    .tender-list { display: grid; gap: 12px; }
+    .tender-item {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: var(--radius-md); padding: 14px 18px;
+      display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    }
+    .tender-item b { display: block; font-size: 14px; }
+    .tender-item small { color: #A7F3D0; font-size: 12px; }
+
+    /* FOOTER */
+    .site-footer {
+      background: #091E13; color: #D5E5DC;
+      padding: 60px 0 34px; margin-top: 40px;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 36px;
+      padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .site-footer h4 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #fff; font-size: 14px; margin-bottom: 14px;
+    }
+    .footer-links { display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: #9BB5A6; }
+    .footer-links a:hover { color: #fff; }
+    .footer-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 24px; font-size: 12px; color: #7C9687; flex-wrap: wrap; gap: 12px;
+    }
+
+    /* MODALS & FORMS */
+    .modal-backdrop {
+      display: none; position: fixed; inset: 0; z-index: 100;
+      background: rgba(8, 22, 14, 0.65); backdrop-filter: blur(6px);
+      padding: 20px; align-items: center; justify-content: center;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal {
+      width: min(680px, 100%); max-height: 90vh; overflow-y: auto;
+      background: var(--card); color: var(--text);
+      border-radius: var(--radius-xl); padding: 30px;
+      position: relative; box-shadow: var(--shadow-lg);
+      border: 1px solid var(--line);
+    }
+    .modal-close {
+      position: absolute; top: 18px; right: 18px;
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--bg-soft); font-size: 20px;
+    }
+    .form-grid { display: grid; gap: 14px; margin-top: 12px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form-grid label { display: grid; gap: 6px; font-size: 12.5px; font-weight: 700; }
+    .form-grid input, .form-grid select, .form-grid textarea {
+      width: 100%; padding: 12px 14px; border-radius: 12px;
+      border: 1px solid var(--line); background: var(--bg);
+      outline-color: var(--emerald);
+    }
+    .btn-primary {
+      background: var(--emerald); color: #fff;
+      padding: 13px 22px; border-radius: 99px;
+      font-weight: 800; font-size: 13.5px; display: inline-flex;
+      align-items: center; justify-content: center; gap: 8px;
+      transition: .2s;
+    }
+    .btn-primary:hover { background: var(--emerald-dark); transform: translateY(-1px); }
+    .btn-secondary {
+      background: var(--bg-soft); color: var(--text);
+      padding: 12px 20px; border-radius: 99px;
+      font-weight: 700; font-size: 13px; border: 1px solid var(--line);
+    }
+
+    /* Free shipping bar in Cart */
+    .shipping-bar-wrap {
+      background: var(--emerald-light); padding: 12px 16px;
+      border-radius: 14px; margin: 14px 0; font-size: 12.5px;
+    }
+    .shipping-track {
+      height: 8px; background: rgba(19, 111, 67, 0.16);
+      border-radius: 99px; overflow: hidden; margin-top: 8px;
+    }
+    .shipping-fill {
+      height: 100%; background: var(--emerald); border-radius: 99px;
+      transition: width 0.3s;
+    }
+    .cart-row {
+      display: grid; grid-template-columns: 56px 1fr auto;
+      gap: 12px; align-items: center; padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .cart-row img { width: 56px; height: 56px; border-radius: 12px; object-fit: cover; }
+    .qty-box {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid var(--line); border-radius: 99px; padding: 2px 8px; margin-top: 5px;
+    }
+    .qty-box button { font-weight: 800; color: var(--emerald); font-size: 15px; }
+
+    /* Toast */
+    .toast {
+      position: fixed; left: 50%; bottom: 26px; z-index: 150;
+      transform: translate(-50%, 20px);
+      background: var(--emerald-deep); color: #fff;
+      padding: 13px 22px; border-radius: 99px;
+      font-size: 13px; font-weight: 700; opacity: 0; pointer-events: none;
+      transition: .25s; box-shadow: var(--shadow-lg);
+    }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+    @media (max-width: 1024px) {
+      .bento-hero, .tender-box, .recipe-grid, .portal-auth-layout, .portal-dash-layout { grid-template-columns: 1fr; }
+      .portal-sidebar { position: static; }
+      .dash-stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .product-grid { grid-template-columns: repeat(3, 1fr); }
+      .bundle-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .bento-main-img { width: 220px; height: 220px; opacity: 0.35; }
+    }
+    @media (max-width: 680px) {
+      .header-row { flex-wrap: wrap; padding: 10px 0; }
+      .smart-search { order: 3; max-width: 100%; flex-basis: 100%; }
+      .product-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .recipe-card, .dash-stats-grid, .detail-grid-box, .detail-loc-stock-box { grid-template-columns: 1fr; }
+      .form-row, .footer-grid { grid-template-columns: 1fr; }
+      .bento-main, .portal-promo-panel, .portal-auth-card { padding: 28px 22px; min-height: auto; }
+      .ticker-right { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP LIVE TICKER -->
+  <div class="top-ticker">
+    <div class="container ticker-inner">
+      <div class="ticker-live">
+        <span class="pulse-dot"></span>
+        <span>Bugun ertalab soat 06:00 da 142 ta fermer yangi hosil va zaxira miqdorini kiritdi</span>
+      </div>
+      <div class="ticker-right">
+        <span class="cashback-wallet" id="walletBadge">💰 Keshbek hamyon: 0 so‘m</span>
+        <span>🚚 150 000 so‘mdan bepul yetkazish</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container header-row">
+      <div class="brand" id="brandHomeLink">
+        <span class="brand-icon">🌿</span>
+        <div class="brand-name">Dehqon<span>Bozor</span><small>ONLINE EKOTIZIM</small></div>
+      </div>
+
+      <form class="smart-search" id="searchForm">
+        <button type="button" class="mic-btn" id="voiceBtn" title="Ovozli qidiruv">🎤</button>
+        <input type="search" id="searchInput" placeholder="Pomidor, qaymoq, tuman yoki fermer nomi..." />
+        <select id="regionSelect" aria-label="Hudud">
+          <option value="">Barcha viloyatlar</option>
+          <option>Toshkent</option><option>Samarqand</option><option>Farg‘ona</option>
+          <option>Surxondaryo</option><option>Andijon</option><option>Namangan</option>
+        </select>
+        <button type="submit" class="search-go">Topish</button>
+      </form>
+
+      <div class="header-actions">
+        <button type="button" class="icon-round" id="themeBtn" title="Tungi / Kunduzgi rejim">🌙</button>
+        <button type="button" class="act-pill customer-cta" id="customerCabinetBtn">
+          👤 <span id="customerHeaderLabel">Xaridor kabineti</span>
+        </button>
+        <button type="button" class="act-pill farmer-cta" id="farmerCabinetBtn">
+          👨‍🌾 <span id="farmerHeaderLabel">Fermer kabineti</span>
+        </button>
+        <button type="button" class="act-pill cart-pill" id="cartBtn">
+          🛒 Savat <span class="cart-badge" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+
+    <nav class="subnav" id="marketSubnav">
+      <div class="container subnav-inner">
+        <div class="subnav-links">
+          <a href="#katalog" onclick="switchToMarket()">🔥 Jonli Bozor</a>
+          <a href="#obuna" onclick="switchToMarket()">📦 Haftalik Obuna (-15%)</a>
+          <a href="#retseptlar" onclick="switchToMarket()">🍲 1-Click Retseptlar</a>
+          <a href="#ulgurji" onclick="switchToMarket()">⚖️ Ulgurji Tenderlar</a>
+          <a href="#" id="openAiBtn">✨ AI Xarid Yordamchisi</a>
+        </div>
+        <div class="subnav-perk">📞 Har bir mahsulotda fermer bilan bevosita telefon aloqasi</div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- =========================================================
+       1-SAHIFA: ASOSIY BOZOR SAHIFASI (MARKETPLACE VIEW)
+       ========================================================= -->
+  <main id="marketMainView">
+    <!-- BENTO HERO -->
+    <section class="hero-section">
+      <div class="container bento-hero">
+        <div class="bento-main">
+          <div class="bento-main-content">
+            <span class="hero-tag">🌱 VOSITACHILARSIZ · BEVOSITA DEHQONDAN</span>
+            <h1>Yangi uzilgan hosil — <em>shudringi ketmay</em> dasturxoningizda.</h1>
+            <p>Mahsulot qaysi dalada ekanini, qancha miqdorda qolganini ko‘ring va fermerning o‘zi bilan telefon orqali bevosita bog‘laning.</p>
+            <div class="hero-btns">
+              <button type="button" class="btn-gold" id="heroCustomerBtn">👤 Xaridor bo‘lib ro‘yxatdan o‘tish</button>
+              <button type="button" class="btn-glass" id="heroFarmerBtn">👨‍🌾 Fermer kabineti</button>
+            </div>
+          </div>
+
+          <img class="bento-main-img" src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=900&q=85" alt="Yangi sabzavotlar" />
+
+          <div class="bento-metrics">
+            <div class="bento-metric"><b>1 450+</b><small>Tasdiqlangan fermerlar</small></div>
+            <div class="bento-metric"><b>Aniq manzil</b><small>Tuman va qishloqqacha</small></div>
+            <div class="bento-metric"><b>Bevosita aloqa</b><small>Fermer telefoni ochiq</small></div>
+          </div>
+        </div>
+
+        <div class="bento-side">
+          <div class="bento-card deal-card">
+            <div>
+              <span class="deal-badge">⚡ KUN TAKLIFI · -22%</span>
+              <h3>Surxondaryo pushti pomidori</h3>
+              <p>📍 Termiz tumani, Yangiariq qishlog‘i · 📦 Omborda: <b>450 kg bor</b></p>
+            </div>
+            <div class="deal-price-row">
+              <div class="deal-price"><b>7 000 so‘m</b><del>9 000 so‘m</del> <small>/ kg</small></div>
+              <button type="button" class="btn-primary" onclick="openProductDetail(1)">Batafsil & Aloqa</button>
+            </div>
+          </div>
+
+          <div class="bento-card">
+            <div>
+              <span class="sec-kicker">✨ AQLLI BOZOR</span>
+              <h3>Byudjetingizni ayting — AI savat tuzib beradi</h3>
+              <p>Masalan: "100 ming so‘mga 4 kishilik oila uchun haftalik meva va sabzavot".</p>
+            </div>
+            <button type="button" class="btn-secondary" id="bentoAiBtn" style="width:100%">AI Yordamchini sinab ko‘rish →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STORIES: BUGUN DALADA -->
+    <section class="stories-strip">
+      <div class="container">
+        <div class="stories-head">
+          <span>📹 BUGUN DALADAN JONLI LAVHALAR</span>
+          <small style="color:var(--muted)">Fermer ustiga bosing</small>
+        </div>
+        <div class="stories-row">
+          <div class="story-pill" onclick="openProductDetail(1)">
+            <div class="story-avatar"><img src="https://images.unsplash.com/photo-1595855759920-86582396756a?w=160&q=80" alt=""></div>
+            <div class="story-meta"><b>Baraka xo‘jaligi</b><small>● 450 kg pomidor tayyor</small></div>
+          </div>
+          <div class="story-pill" onclick="openProductDetail(3)">
+            <div class="story-avatar"><img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?w=160&q=80" alt=""></div>
+            <div class="story-meta"><b>Sof Sut fermasi</b><small>● 80 litr yangi sut</small></div>
+          </div>
+          <div class="story-pill" onclick="openProductDetail(8)">
+            <div class="story-avatar"><img src="https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=160&q=80" alt=""></div>
+            <div class="story-meta"><b>Samarqand bog‘i</b><small>● 350 kg kishmish</small></div>
+          </div>
+          <div class="story-pill" onclick="openProductDetail(11)">
+            <div class="story-avatar"><img src="https://images.unsplash.com/photo-1587049352851-8d4e89133924?w=160&q=80" alt=""></div>
+            <div class="story-meta"><b>Asalchi Oila</b><small>● 60 banka tog‘ asali</small></div>
+          </div>
+          <div class="story-pill" onclick="openProductDetail(7)">
+            <div class="story-avatar"><img src="https://images.unsplash.com/photo-1445282768818-728615cc910a?w=160&q=80" alt=""></div>
+            <div class="story-meta"><b>Hosildor Dala</b><small>● 900 kg oshbop sabzi</small></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN CATALOG -->
+    <section class="section" id="katalog" style="padding-top: 10px;">
+      <div class="container">
+        <div class="sec-top">
+          <div>
+            <span class="sec-kicker">JONLI RASTA</span>
+            <h2>Bugungi sarxil hosil</h2>
+            <p>Mahsulot ustiga bosib qayerda ekanligini, qancha qolganini ko‘ring va fermerga qo‘ng‘iroq qiling</p>
+          </div>
+          <div id="resultCounter" style="font-weight:700; color:var(--emerald)"></div>
+        </div>
+
+        <div class="cat-bar" id="categoryBar">
+          <button type="button" class="cat-chip active" data-cat="Barchasi">✳ Barchasi</button>
+          <button type="button" class="cat-chip" data-cat="Sabzavotlar">🥦 Sabzavotlar</button>
+          <button type="button" class="cat-chip" data-cat="Mevalar">🍎 Mevalar</button>
+          <button type="button" class="cat-chip" data-cat="Sut mahsulotlari">🥛 Sut va qaymoq</button>
+          <button type="button" class="cat-chip" data-cat="Go‘sht va tuxum">🥚 Tuxum va don</button>
+          <button type="button" class="cat-chip" data-cat="Poliz va asal">🍉 Poliz va asal</button>
+        </div>
+
+        <div class="catalog-toolbar">
+          <div class="toolbar-filters">
+            <select id="sortSelect" aria-label="Saralash">
+              <option value="popular">🔥 Ommabop</option>
+              <option value="cheap">📉 Avval arzonlari</option>
+              <option value="expensive">📈 Avval qimmatlari</option>
+              <option value="rating">⭐ Yuqori reyting</option>
+            </select>
+            <input type="number" id="maxPriceInput" placeholder="Maks. narx (so‘m)" style="width:165px" />
+            <button type="button" class="btn-secondary" id="favFilterBtn" style="padding:8px 14px;font-size:12px">♡ Sevimlilar</button>
+          </div>
+          <button type="button" class="btn-secondary" id="resetFiltersBtn" style="padding:8px 14px;font-size:12px">Tozalash ↺</button>
+        </div>
+
+        <div class="product-grid" id="productGrid"></div>
+      </div>
+    </section>
+
+    <!-- WEEKLY SUBSCRIPTION BUNDLES -->
+    <section class="section bundles-section" id="obuna">
+      <div class="container">
+        <div class="sec-top">
+          <div>
+            <span class="sec-kicker">VAQT VA PULNI TEJANG</span>
+            <h2>Haftalik obuna savatlari</h2>
+            <p>Bir marta tanlang — har shanba ertalab yangi hosil 15% arzon narxda uyingizga boradi</p>
+          </div>
+        </div>
+
+        <div class="bundle-grid">
+          <article class="bundle-card">
+            <span class="bundle-save">12% tejaladi</span>
+            <div class="bundle-icon">🥗</div>
+            <h3>Kichik Oila Savati</h3>
+            <p>2–3 kishilik oila uchun eng kerakli haftalik sabzavot va ko‘katlar.</p>
+            <ul class="bundle-items">
+              <li>Kartoshka (3 kg) va piyoz (2 kg)</li>
+              <li>Pushti pomidor (2 kg) va bodring (2 kg)</li>
+              <li>Qizil sabzi (2 kg) va barra ko‘katlar</li>
+              <li>Tog‘ tuxumi (10 dona)</li>
+            </ul>
+            <div class="bundle-bottom">
+              <div><strong>79 000 so‘m</strong> <small style="color:var(--muted)">/ hafta</small></div>
+              <button type="button" class="btn-primary" onclick="addBundleToCart('Kichik Oila Savati', 79000)">Savatga qo‘shish</button>
+            </div>
+          </article>
+
+          <article class="bundle-card popular">
+            <span class="bundle-save" style="background:var(--emerald);color:#fff">ENG OMMABOP · -15%</span>
+            <div class="bundle-icon">🧺</div>
+            <h3>Barakali Ro‘zg‘or Savati</h3>
+            <p>4–6 kishilik oila uchun to‘liq meva, sabzavot va sut mahsulotlari to‘plami.</p>
+            <ul class="bundle-items">
+              <li>Kartoshka (5 kg), piyoz (3 kg), sabzi (3 kg)</li>
+              <li>Pomidor (3 kg), bodring (2 kg), qalampir (1 kg)</li>
+              <li>Samarqand olmasi (2 kg) va uzum (1.5 kg)</li>
+              <li>Tabiiy sut (2 litr), qaymoq va 20 dona tuxum</li>
+            </ul>
+            <div class="bundle-bottom">
+              <div><strong>155 000 so‘m</strong> <small style="color:var(--muted)">/ hafta</small></div>
+              <button type="button" class="btn-primary" onclick="addBundleToCart('Barakali Ro‘zg‘or Savati', 155000)">Savatga qo‘shish</button>
+            </div>
+          </article>
+
+          <article class="bundle-card">
+            <span class="bundle-save">15% tejaladi</span>
+            <div class="bundle-icon">🍯</div>
+            <h3>Eko Nonushta Savati</h3>
+            <p>Har tong tabiiy qishloq ne’matlari bilan sog‘lom nonushta qiluvchilar uchun.</p>
+            <ul class="bundle-items">
+              <li>Qishloq qaymog‘i (500 g) va suzma qatiq (1 kg)</li>
+              <li>Tog‘ tuxumi (20 dona)</li>
+              <li>Chodak tog‘ asali (500 g)</li>
+              <li>Sarxil mevalar (2 kg)</li>
+            </ul>
+            <div class="bundle-bottom">
+              <div><strong>112 000 so‘m</strong> <small style="color:var(--muted)">/ hafta</small></div>
+              <button type="button" class="btn-primary" onclick="addBundleToCart('Eko Nonushta Savati', 112000)">Savatga qo‘shish</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1-CLICK RECIPE TO CART -->
+    <section class="section" id="retseptlar">
+      <div class="container">
+        <div class="sec-top">
+          <div>
+            <span class="sec-kicker">OSHXONA YORDAMCHISI</span>
+            <h2>1-Click Retsept: Masalliqlar bir tugmada savatda</h2>
+            <p>Bugun nima pishirishingizni tanlang, kerakli fermer mahsulotlarini o‘zimiz jamlab beramiz</p>
+          </div>
+        </div>
+
+        <div class="recipe-grid">
+          <article class="recipe-card">
+            <img class="recipe-img" src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=700&q=80" alt="O'zbek palovi" />
+            <div class="recipe-info">
+              <div>
+                <span class="sec-kicker">MILLIY TAOM · 6 KISHILIK</span>
+                <h3>Choyxona Palovi To‘plami</h3>
+                <p style="color:var(--muted);font-size:13px">Osh uchun eng muhim sabzi, piyoz va achchiq-chuchuk salati masalliqlari bitta to‘plamda.</p>
+                <div class="recipe-tags">
+                  <span>🥕 Sabzi (2 kg)</span>
+                  <span>🍅 Pomidor (1 kg)</span>
+                  <span>🥒 Bodring (1 kg)</span>
+                  <span>🥚 Tuxum (10 dona)</span>
+                </div>
+              </div>
+              <button type="button" class="btn-primary" onclick="addRecipeToCart([7,7,1,5,4], 'Choyxona Palovi masalliqlari')">
+                Barcha masalliqlarni savatga qo‘shish (42 000 so‘m)
+              </button>
+            </div>
+          </article>
+
+          <article class="recipe-card">
+            <img class="recipe-img" src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=700&q=80" alt="Vitaminli salat" />
+            <div class="recipe-info">
+              <div>
+                <span class="sec-kicker">SOG‘LOM OVQATLANISH</span>
+                <h3>Yozgi Vitamin va Meva Miks</h3>
+                <p style="color:var(--muted);font-size:13px">Bolalar va oila immuniteti uchun eng sarxil meva-sabzavotlar hamda tabiiy asal.</p>
+                <div class="recipe-tags">
+                  <span>🍎 Olma (1 kg)</span>
+                  <span>🍇 Kishmish (1 kg)</span>
+                  <span>🫑 Qalampir (1 kg)</span>
+                  <span>🍯 Tog‘ asali (500 g)</span>
+                </div>
+              </div>
+              <button type="button" class="btn-primary" onclick="addRecipeToCart([2,8,10,11], 'Vitamin va Meva Miks')">
+                Barcha masalliqlarni savatga qo‘shish (81 000 so‘m)
+              </button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHOLESALE / TENDER BOARD -->
+    <section class="section" id="ulgurji" style="padding-top: 10px;">
+      <div class="container">
+        <div class="tender-box">
+          <div>
+            <span class="hero-tag">⚖️ B2B VA ULGURJI SAVDO</span>
+            <h2 style="font-size:clamp(26px,3.2vw,40px);color:#fff;margin-bottom:14px">To‘y, restoran yoki do‘kon uchun katta hajmda kerakmi?</h2>
+            <p style="color:rgba(255,255,255,0.85);margin-bottom:24px">E’lon qoldiring — O‘zbekiston bo‘ylab o‘nlab fermerlar o‘z ulgurji narxlarini taklif qiladi. Siz eng ma’qulini tanlaysiz.</p>
+            <button type="button" class="btn-gold" id="openTenderModalBtn">+ Ulgurji so‘rov e’lon qilish</button>
+          </div>
+          <div class="tender-list" id="tenderBoardList"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================
+       2-SAHIFA: ALOHIDA FERMER PORTALI VA KABINETI SAHIFASI
+       ========================================================= -->
+  <section id="farmerPortalPage" class="portal-page-wrap hidden-page">
+    <div class="container">
+      <div class="portal-topbar">
+        <button type="button" class="back-market-btn" onclick="switchToMarket()">
+          ← Asosiy bozor sahifasiga qaytish
+        </button>
+        <div style="font-size:13px; color:var(--muted); font-weight:600">
+          👨‍🌾 DehqonBozor — Fermerlar va yetishtiruvchilar portali
+        </div>
+      </div>
+      <div id="farmerPortalDynamic"></div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       3-SAHIFA: ALOHIDA XARIDOR PORTALI VA KABINETI SAHIFASI
+       ========================================================= -->
+  <section id="customerPortalPage" class="portal-page-wrap hidden-page">
+    <div class="container">
+      <div class="portal-topbar">
+        <button type="button" class="back-market-btn" onclick="switchToMarket()">
+          ← Asosiy bozor sahifasiga qaytish
+        </button>
+        <div style="font-size:13px; color:var(--muted); font-weight:600">
+          👤 DehqonBozor — Xaridor shaxsiy kabineti
+        </div>
+      </div>
+      <div id="customerPortalDynamic"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand" style="color:#fff;margin-bottom:14px" onclick="switchToMarket()">
+            <span class="brand-icon">🌿</span>
+            <div class="brand-name">Dehqon<span>Bozor</span><small style="color:#86A895">ONLINE EKOTIZIM</small></div>
+          </div>
+          <p style="color:#9BB5A6;font-size:13px;max-width:300px">Dehqon mehnatini qadrlaydigan va xaridorga eng toza ne’matlarni yetkazadigan milliy onlayn bozor.</p>
+          <p style="font-weight:700;color:#fff;margin-top:16px">☎ +998 (71) 200-40-40 · info@dehqonbozor.uz</p>
+        </div>
+        <div>
+          <h4>Xaridorlarga</h4>
+          <div class="footer-links">
+            <a href="#" onclick="openCustomerPage('register');return false;">Xaridor bo‘lib ro‘yxatdan o‘tish</a>
+            <a href="#" onclick="openCustomerPage('login');return false;">Xaridor kabinetiga kirish</a>
+            <a href="#obuna" onclick="switchToMarket()">Haftalik obuna savatlari</a>
+            <a href="#retseptlar" onclick="switchToMarket()">1-Click Retseptlar</a>
+          </div>
+        </div>
+        <div>
+          <h4>Fermerlarga</h4>
+          <div class="footer-links">
+            <a href="#" onclick="openFarmerPage('register');return false;">Fermer bo‘lib ro‘yxatdan o‘tish</a>
+            <a href="#" onclick="openFarmerPage('login');return false;">Fermer kabinetiga kirish</a>
+            <a href="#ulgurji" onclick="switchToMarket()">Ulgurji tenderlar</a>
+          </div>
+        </div>
+        <div>
+          <h4>Ishonch kafolati</h4>
+          <div class="footer-links">
+            <span>✓ Har bir mahsulotda aniq manzil va qoldiq</span>
+            <span>✓ Fermer bilan to‘g‘ridan-to‘g‘ri telefon aloqa</span>
+            <span>✓ Har xariddan 2% Keshbek</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 DehqonBozor Online. Barcha huquqlar himoyalangan.</span>
+        <span>Yangi avlod milliy agromarketpleysi 🌱</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <!-- UNIVERSAL MODAL -->
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button type="button" class="modal-close" id="modalClose">×</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <script>
+    const defaultProducts = [
+      {id:1, name:"Surxondaryo pushti pomidori", category:"Sabzavotlar", price:7000, unit:"kg", farmer:"Baraka xo‘jaligi", farmerOwner:"Bahrom Rahimov", farmerPhone:"+998 90 123 45 67", region:"Surxondaryo", locationDetail:"Termiz tumani, Yangiariq QFY, 14-dala", quantity:"450 kg", harvestTime:"Bugun 06:00 da uzilgan", rating:4.9, badge:"Kun taklifi", img:"https://images.unsplash.com/photo-1546094096-0df4bcaaa337?auto=format&fit=crop&w=700&q=80", desc:"Quyoshda pishgan, shirali va po‘sti yupqa pushti pomidor. Bevosita issiqxonadan va ochiq daladan."},
+      {id:2, name:"Samarqand Golden olmasi", category:"Mevalar", price:12000, unit:"kg", farmer:"Bog‘bon aka", farmerOwner:"Olimjon Karimov", farmerPhone:"+998 91 555 44 33", region:"Samarqand", locationDetail:"Toyloq tumani, Bog‘izog‘on qishlog‘i", quantity:"680 kg", harvestTime:"Kecha saralangan", rating:4.8, badge:"Sarxil", img:"https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=700&q=80", desc:"Bog‘dan yangi uzilgan, qarsildoq va xushbo‘y olma. Muzlatkichda saqlanmagan."},
+      {id:3, name:"Ertalabki ferma suti", category:"Sut mahsulotlari", price:10000, unit:"litr", farmer:"Sof Sut fermasi", farmerOwner:"Halima opa", farmerPhone:"+998 93 321 77 88", region:"Toshkent", locationDetail:"Qibray tumani, Baytqo‘rg‘on mahallasi", quantity:"85 litr", harvestTime:"Bugun 05:30 sog‘im", rating:5.0, badge:"100% Tabiiy", img:"https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=700&q=80", desc:"Har kuni tongda sog‘ilgan, qaymog‘i olinmagan toza sigir suti."},
+      {id:4, name:"Uy tovug‘i tuxumi", category:"Go‘sht va tuxum", price:18000, unit:"10 dona", farmer:"Mehribon ferma", farmerOwner:"Rustam Aliyev", farmerPhone:"+998 94 404 11 22", region:"Farg‘ona", locationDetail:"Quva tumani, Soybo‘yi ko‘chasi 18-uy", quantity:"120 quti (1200 dona)", harvestTime:"Kunlik yig‘im", rating:4.9, badge:"Organik", img:"https://images.unsplash.com/photo-1506976785307-8732e854ad03?auto=format&fit=crop&w=700&q=80", desc:"Erkin yurib tabiiy don bilan boqilgan qishloq tovuqlarining sarxil tuxumi."},
+      {id:5, name:"Qarsildoq Orzu bodringi", category:"Sabzavotlar", price:6500, unit:"kg", farmer:"Baraka xo‘jaligi", farmerOwner:"Bahrom Rahimov", farmerPhone:"+998 90 123 45 67", region:"Toshkent", locationDetail:"Zangiota tumani, Erkin mahallasi", quantity:"310 kg", harvestTime:"Bugun 06:30 da uzilgan", rating:4.8, badge:"Bugungi terim", img:"https://images.unsplash.com/photo-1604977042946-1eecc30f269e?auto=format&fit=crop&w=700&q=80", desc:"Salat va dasturxon uchun mayda urug‘li, qarsildoq bodring."},
+      {id:6, name:"Mirzacho‘l shirin tarvuzi", category:"Poliz va asal", price:15000, unit:"dona (~6 kg)", farmer:"Sahro polizlari", farmerOwner:"Sherzod Норmatov", farmerPhone:"+998 99 888 66 55", region:"Samarqand", locationDetail:"Bulung‘ur tumani, Katta dala maydoni", quantity:"190 dona", harvestTime:"Bugun ertalab", rating:4.9, badge:"Shirin hosil", img:"https://images.unsplash.com/photo-1587049352851-8d4e89133924?auto=format&fit=crop&w=700&q=80", desc:"Kesilganda qarsillaydigan, qip-qizil va suvli poliz tarvuzi."},
+      {id:7, name:"Andijon oshbop sabzisi", category:"Sabzavotlar", price:4500, unit:"kg", farmer:"Hosildor Dala", farmerOwner:"Abduвали aka", farmerPhone:"+998 97 234 56 78", region:"Andijon", locationDetail:"Asaka tumani, Niyozbotir QFY", quantity:"1 200 kg", harvestTime:"Yangi kovlangan", rating:4.8, badge:"Oshbop", img:"https://images.unsplash.com/photo-1445282768818-728615cc910a?auto=format&fit=crop&w=700&q=80", desc:"Palovga shirin ta’m beruvchi suvli sariq va qizil sabzi."},
+      {id:8, name:"Qora kishmish uzumi", category:"Mevalar", price:16000, unit:"kg", farmer:"Samarqand bog‘i", farmerOwner:"Nosirjon Jo‘rayev", farmerPhone:"+998 90 600 70 80", region:"Samarqand", locationDetail:"Urgut tumani, G‘o‘s qishlog‘i", quantity:"350 kg", harvestTime:"Bugun uzilgan", rating:5.0, badge:"Eksportbop", img:"https://images.unsplash.com/photo-1537640538966-79f369143f8f?auto=format&fit=crop&w=700&q=80", desc:"Urug‘siz, asaldek shirin Samarqand kishmish uzumi."},
+      {id:9, name:"Quyuq qishloq qaymog‘i", category:"Sut mahsulotlari", price:24000, unit:"500 g", farmer:"Sof Sut fermasi", farmerOwner:"Halima opa", farmerPhone:"+998 93 321 77 88", region:"Toshkent", locationDetail:"Qibray tumani, Baytqo‘rg‘on mahallasi", quantity:"45 banka", harvestTime:"Bugun tayyorlangan", rating:5.0, badge:"Nonushtaga", img:"https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=700&q=80", desc:"Qoshiq turadigan darajada quyuq va mazali uy qaymog‘i."},
+      {id:10, name:"Rangli bulg‘or qalampiri", category:"Sabzavotlar", price:11000, unit:"kg", farmer:"Hosildor Dala", farmerOwner:"Abduvali aka", farmerPhone:"+998 97 234 56 78", region:"Andijon", locationDetail:"Asaka tumani, Niyozbotir QFY", quantity:"240 kg", harvestTime:"Kecha terilgan", rating:4.7, badge:"Vitaminli", img:"https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?auto=format&fit=crop&w=700&q=80", desc:"Etli va xushbo‘y qizil-sariq bulg‘or qalampirlari."},
+      {id:11, name:"Chodak tog‘ asali", category:"Poliz va asal", price:42000, unit:"500 g", farmer:"Asalchi Oila", farmerOwner:"Zokirjon ota", farmerPhone:"+998 95 300 20 10", region:"Namangan", locationDetail:"Pop tumani, Chodak tog‘ hududi", quantity:"60 banka (30 kg)", harvestTime:"Mavsumiy toza asal", rating:5.0, badge:"Shifobaxsh", img:"https://images.unsplash.com/photo-1587049352851-8d4e89133924?auto=format&fit=crop&w=700&q=80", desc:"Tog‘ giyohlaridan yig‘ilgan 100% tabiiy va laboratoriya tekshiruvidan o‘tgan asal."},
+      {id:12, name:"Tog‘li hudud kartoshkasi", category:"Sabzavotlar", price:5500, unit:"kg", farmer:"Baraka xo‘jaligi", farmerOwner:"Bahrom Rahimov", farmerPhone:"+998 90 123 45 67", region:"Toshkent", locationDetail:"Bo‘stonliq tumani, G‘azalkent yo‘li", quantity:"1 800 kg", harvestTime:"Ombor zaxirasi", rating:4.8, badge:"Ro‘zg‘orbop", img:"https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=700&q=80", desc:"Qovurish va qaynatishda ezilib ketmaydigan toza tog‘ kartoshkasi."}
+    ];
+
+    const readLS = (k, def) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : def; } catch(e) { return def; } };
+    const saveLS = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e) {} };
+    const cleanPhone = p => String(p || "").replace(/[\s()-]/g, "");
+    const escapeHtml = s => String(s || "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+    // Standart demo Fermer va Xaridor akkauntlari
+    const defaultFarmers = [
+      {
+        name: "Bahrom Rahimov",
+        farm: "Baraka xo‘jaligi",
+        phone: "+998 90 123 45 67",
+        region: "Surxondaryo",
+        password: "1234",
+        specialization: "Sabzavotlar va poliz ekinlari",
+        createdAt: "2026-01-15"
+      }
+    ];
+    if (!localStorage.getItem("db_orig_farmers")) saveLS("db_orig_farmers", defaultFarmers);
+
+    const defaultCustomers = [
+      {
+        name: "Sardor Alimov",
+        phone: "+998 90 999 88 77",
+        region: "Toshkent",
+        address: "Yunusobod tumani, 12-mavze, 24-uy",
+        password: "1234",
+        createdAt: "2026-02-10"
+      }
+    ];
+    if (!localStorage.getItem("db_orig_customers")) saveLS("db_orig_customers", defaultCustomers);
+
+    const customProducts = readLS("db_orig_farmer_products", []);
+    const products = [...defaultProducts];
+    customProducts.forEach(cp => {
+      if (!products.some(x => x.id === cp.id)) products.unshift(cp);
+    });
+
+    const state = {
+      category: "Barchasi",
+      query: "",
+      region: "",
+      sort: "popular",
+      maxPrice: 0,
+      onlyFav: false,
+      farmerAuthMode: "login",
+      farmerDashTab: "overview",
+      customerAuthMode: "login",
+      customerDashTab: "orders",
+      cart: readLS("db_orig_cart", []),
+      favs: new Set(readLS("db_orig_favs", [])),
+      wallet: readLS("db_orig_wallet", 4500),
+      tenders: readLS("db_orig_tenders", [
+        {id:1, title:"Restoran uchun 500 kg pushti pomidor", region:"Toshkent", buyer:"Rayhon Milliy Taomlar", phone:"+998 90 111 22 33"},
+        {id:2, title:"To‘y marosimi uchun 300 kg uzum va olma", region:"Samarqand", buyer:"Farhod aka", phone:"+998 93 444 55 66"},
+        {id:3, title:"Do‘kon tarmog‘i uchun 2 tonna kartoshka", region:"Andijon", buyer:"Baraka Market", phone:"+998 99 777 88 99"}
+      ])
+    };
+
+    const $ = s => document.querySelector(s);
+    const fmt = n => new Intl.NumberFormat("uz-UZ").format(Math.round(n)) + " so‘m";
+
+    let toastTimer;
+    function toast(msg) {
+      const t = $("#toast");
+      t.textContent = msg;
+      t.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => t.classList.remove("show"), 2600);
+    }
+
+    function getCurrentFarmer() { return readLS("db_orig_current_farmer", null); }
+    function setCurrentFarmer(farmerObj) {
+      if (farmerObj) saveLS("db_orig_current_farmer", farmerObj);
+      else localStorage.removeItem("db_orig_current_farmer");
+      updateHeaderBadges();
+    }
+
+    function getCurrentCustomer() { return readLS("db_orig_current_customer", null); }
+    function setCurrentCustomer(custObj) {
+      if (custObj) saveLS("db_orig_current_customer", custObj);
+      else localStorage.removeItem("db_orig_current_customer");
+      updateHeaderBadges();
+    }
+
+    function updateHeaderBadges() {
+      const count = state.cart.reduce((s, i) => s + i.qty, 0);
+      $("#cartCount").textContent = count;
+      $("#walletBadge").textContent = `💰 Keshbek hamyon: ${fmt(state.wallet)}`;
+      const cf = getCurrentFarmer();
+      $("#farmerHeaderLabel").textContent = cf ? cf.farm : "Fermer kabineti";
+      const cc = getCurrentCustomer();
+      $("#customerHeaderLabel").textContent = cc ? cc.name.split(" ")[0] : "Xaridor kabineti";
+    }
+
+    /* =====================================================
+       SAHIFALAR ARO O'TISH: BOZOR <-> FERMER <-> XARIDOR
+       ===================================================== */
+    function switchToMarket() {
+      $("#farmerPortalPage").classList.add("hidden-page");
+      $("#customerPortalPage").classList.add("hidden-page");
+      $("#marketMainView").classList.remove("hidden-page");
+      $("#marketSubnav").classList.remove("hidden-page");
+      $("#farmerCabinetBtn").classList.remove("active-page");
+      $("#customerCabinetBtn").classList.remove("active-page");
+      renderCatalog();
+    }
+
+    function openFarmerPage(preferredAuthMode) {
+      if (preferredAuthMode === "login" || preferredAuthMode === "register") {
+        state.farmerAuthMode = preferredAuthMode;
+      }
+      $("#marketMainView").classList.add("hidden-page");
+      $("#marketSubnav").classList.add("hidden-page");
+      $("#customerPortalPage").classList.add("hidden-page");
+      $("#farmerPortalPage").classList.remove("hidden-page");
+      $("#customerCabinetBtn").classList.remove("active-page");
+      $("#farmerCabinetBtn").classList.add("active-page");
+      renderFarmerPortal();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function openCustomerPage(preferredAuthMode) {
+      if (preferredAuthMode === "login" || preferredAuthMode === "register") {
+        state.customerAuthMode = preferredAuthMode;
+      }
+      $("#marketMainView").classList.add("hidden-page");
+      $("#marketSubnav").classList.add("hidden-page");
+      $("#farmerPortalPage").classList.add("hidden-page");
+      $("#customerPortalPage").classList.remove("hidden-page");
+      $("#farmerCabinetBtn").classList.remove("active-page");
+      $("#customerCabinetBtn").classList.add("active-page");
+      renderCustomerPortal();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    /* =====================================================
+       XARIDOR PORTALI (KIRISH / RO'YXATDAN O'TISH / KABINET)
+       ===================================================== */
+    function renderCustomerPortal() {
+      const customer = getCurrentCustomer();
+      const container = $("#customerPortalDynamic");
+      if (!customer) {
+        renderCustomerAuthView(container);
+      } else {
+        renderCustomerDashboardView(container, customer);
+      }
+    }
+
+    function renderCustomerAuthView(container) {
+      const isLogin = state.customerAuthMode === "login";
+      container.innerHTML = `
+        <div class="portal-auth-layout">
+          <div class="portal-promo-panel customer-theme">
+            <div>
+              <span class="hero-tag">👤 XARIDOR SHAXSIY KABINETI</span>
+              <h1>Daladan uyingizgacha — ishonchli va tejamkor xarid.</h1>
+              <p>Xaridor sifatida ro‘yxatdan o‘ting, har bir xariddan 2% keshbek yig‘ing, mahsulotlarning aniq manzilini ko‘ring va fermerlar bilan bevosita bog‘laning.</p>
+
+              <div class="portal-perks-list">
+                <div class="portal-perk-item">
+                  <div class="portal-perk-icon">📍</div>
+                  <div>
+                    <b>Aniq manzil va zaxira ma’lumoti</b>
+                    <small>Har bir mahsulot qaysi viloyat va tumanda ekanini hamda qancha qolganini oldindan ko‘rasiz.</small>
+                  </div>
+                </div>
+                <div class="portal-perk-item">
+                  <div class="portal-perk-icon">📞</div>
+                  <div>
+                    <b>Fermer bilan to‘g‘ridan-to‘g‘ri telefon aloqa</b>
+                    <small>Vositachilarsiz! Mahsulot sifatini yoki ulgurji narxni fermerning o‘zi bilan gaplashib oling.</small>
+                  </div>
+                </div>
+                <div class="portal-perk-item">
+                  <div class="portal-perk-icon">🎁</div>
+                  <div>
+                    <b>Keshbek hamyon va buyurtmalar tarixi</b>
+                    <small>Yig‘ilgan bonuslarni keyingi xaridlarda ishlating va yetkazib berishni kuzating.</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="font-size:12.5px; color:rgba(255,255,255,0.78)">
+              🔒 Ma’lumotlaringiz xavfsiz saqlanadi · 100% sifat kafolati
+            </div>
+          </div>
+
+          <div class="portal-auth-card">
+            <div class="auth-tabs">
+              <button type="button" class="auth-tab-btn ${isLogin ? 'active' : ''}" id="custTabLoginBtn">
+                🔑 Xaridor bo‘lib kirish
+              </button>
+              <button type="button" class="auth-tab-btn ${!isLogin ? 'active' : ''}" id="custTabRegisterBtn">
+                📝 Ro‘yxatdan o‘tish
+              </button>
+            </div>
+
+            ${isLogin ? `
+              <div>
+                <h2 style="font-size:26px;margin-bottom:6px">Xaridor kabinetiga kirish</h2>
+                <p style="color:var(--muted);font-size:13.5px;margin-bottom:18px">Telefon raqamingiz va parolingiz orqali shaxsiy kabinetingizga kiring.</p>
+                <form class="form-grid" id="customerLoginForm">
+                  <label>Telefon raqamingiz
+                    <input name="phone" type="tel" required placeholder="+998 90 999 88 77" value="+998 90 999 88 77" />
+                  </label>
+                  <label>Parol
+                    <input name="password" type="password" required placeholder="••••••••" value="1234" />
+                  </label>
+                  <button type="submit" class="btn-primary" style="width:100%;margin-top:6px;padding:15px">
+                    Kabinetga kirish →
+                  </button>
+                </form>
+                <div class="auth-demo-box">
+                  <span>💡 <b>Demo xaridor:</b> Telefon: <code>+998 90 999 88 77</code> · Parol: <code>1234</code></span>
+                </div>
+              </div>
+            ` : `
+              <div>
+                <h2 style="font-size:26px;margin-bottom:6px">Yangi xaridor sifatida ro‘yxatdan o‘tish</h2>
+                <p style="color:var(--muted);font-size:13.5px;margin-bottom:18px">Ro‘yxatdan o‘ting va dastlabki xaridingiz uchun 4 500 so‘m bonus keshbek oling!</p>
+                <form class="form-grid" id="customerRegisterForm">
+                  <div class="form-row">
+                    <label>Ism va familiyangiz
+                      <input name="name" required placeholder="Masalan: Sardor Alimov" />
+                    </label>
+                    <label>Telefon raqam
+                      <input name="phone" type="tel" required placeholder="+998 90 123 45 67" />
+                    </label>
+                  </div>
+                  <div class="form-row">
+                    <label>Hududingiz (Viloyat)
+                      <select name="region" required>
+                        <option>Toshkent</option><option>Samarqand</option><option>Farg‘ona</option>
+                        <option>Surxondaryo</option><option>Andijon</option><option>Namangan</option>
+                        <option>Buxoro</option><option>Qashqadaryo</option><option>Xorazm</option>
+                      </select>
+                    </label>
+                    <label>Parol yarating
+                      <input name="password" type="password" minlength="4" required placeholder="Kamida 4 ta belgi" />
+                    </label>
+                  </div>
+                  <label>Doimiy yetkazib berish manzilingiz
+                    <input name="address" required placeholder="Tuman, mahalla, ko‘cha va uy raqami" />
+                  </label>
+                  <button type="submit" class="btn-primary" style="width:100%;margin-top:6px;padding:15px">
+                    Ro‘yxatdan o‘tish va xaridni boshlash →
+                  </button>
+                </form>
+              </div>
+            `}
+          </div>
+        </div>
+      `;
+
+      $("#custTabLoginBtn").addEventListener("click", () => {
+        state.customerAuthMode = "login";
+        renderCustomerPortal();
+      });
+      $("#custTabRegisterBtn").addEventListener("click", () => {
+        state.customerAuthMode = "register";
+        renderCustomerPortal();
+      });
+
+      const loginForm = $("#customerLoginForm");
+      if (loginForm) {
+        loginForm.addEventListener("submit", e => {
+          e.preventDefault();
+          const d = Object.fromEntries(new FormData(loginForm).entries());
+          const customers = readLS("db_orig_customers", defaultCustomers);
+          const found = customers.find(c => cleanPhone(c.phone) === cleanPhone(d.phone) && c.password === d.password);
+          if (!found) {
+            toast("❌ Telefon raqam yoki parol noto‘g‘ri!");
+            return;
+          }
+          setCurrentCustomer(found);
+          state.customerDashTab = "orders";
+          renderCustomerPortal();
+          toast(`👋 Xush kelibsiz, ${found.name}!`);
+        });
+      }
+
+      const regForm = $("#customerRegisterForm");
+      if (regForm) {
+        regForm.addEventListener("submit", e => {
+          e.preventDefault();
+          const d = Object.fromEntries(new FormData(regForm).entries());
+          const customers = readLS("db_orig_customers", defaultCustomers);
+          if (customers.some(c => cleanPhone(c.phone) === cleanPhone(d.phone))) {
+            toast("⚠️ Bu raqam allaqachon ro‘yxatdan o‘tgan. Kirish bo‘limidan foydalaning.");
+            state.customerAuthMode = "login";
+            renderCustomerPortal();
+            return;
+          }
+          const newCust = {
+            name: d.name.trim(),
+            phone: d.phone.trim(),
+            region: d.region,
+            address: d.address.trim(),
+            password: d.password,
+            createdAt: new Date().toISOString().slice(0, 10)
+          };
+          customers.push(newCust);
+          saveLS("db_orig_customers", customers);
+          setCurrentCustomer(newCust);
+          state.customerDashTab = "orders";
+          renderCustomerPortal();
+          toast(`🎉 Tabriklaymiz, ${newCust.name}! Xaridor kabinetingiz ochildi.`);
+        });
+      }
+    }
+
+    function renderCustomerDashboardView(container, customer) {
+      const allOrders = readLS("db_orig_orders", []);
+      const favProducts = products.filter(p => state.favs.has(p.id));
+      const tab = state.customerDashTab;
+
+      container.innerHTML = `
+        <div class="portal-dash-layout">
+          <aside class="portal-sidebar">
+            <div class="portal-profile-mini">
+              <div class="portal-avatar-lg">👤</div>
+              <b style="font-size:16px;display:block">${escapeHtml(customer.name)}</b>
+              <small style="color:var(--muted);display:block;margin-top:2px">${escapeHtml(customer.phone)} · ${escapeHtml(customer.region)}</small>
+              <span class="portal-verified-pill">✓ Doimiy xaridor</span>
+            </div>
+
+            <nav class="portal-nav-list">
+              <button type="button" class="portal-nav-btn ${tab==='orders'?'active':''}" data-ctab="orders">
+                📦 Buyurtmalarim (${allOrders.length})
+              </button>
+              <button type="button" class="portal-nav-btn ${tab==='favs'?'active':''}" data-ctab="favs">
+                ♥ Sevimli mahsulotlar (${favProducts.length})
+              </button>
+              <button type="button" class="portal-nav-btn ${tab==='profile'?'active':''}" data-ctab="profile">
+                ⚙️ Profil va manzil
+              </button>
+              <button type="button" class="portal-nav-btn logout-btn" id="customerLogoutBtn">
+                🚪 Akkauntdan chiqish
+              </button>
+            </nav>
+          </aside>
+
+          <div class="portal-main-panel">
+            <div class="dash-banner">
+              <div>
+                <span class="hero-tag" style="margin-bottom:8px">👤 XARIDOR SHAXSIY KABINETI</span>
+                <h2>Xush kelibsiz, ${escapeHtml(customer.name)}!</h2>
+                <p>📍 Manzil: ${escapeHtml(customer.address || customer.region)} &nbsp;·&nbsp; 💰 Keshbek balans: <b>${fmt(state.wallet)}</b></p>
+              </div>
+              <div style="display:flex;gap:10px;flex-wrap:wrap">
+                <button type="button" class="btn-gold" onclick="switchToMarket()">🛒 Xarid qilishga o‘tish</button>
+                <button type="button" class="btn-glass" onclick="openCartModal()">Savatchani ochish (${state.cart.reduce((s,i)=>s+i.qty,0)})</button>
+              </div>
+            </div>
+
+            ${tab === 'orders' ? `
+              <div class="dash-card-box">
+                <h3 style="font-size:22px;margin-bottom:14px">📦 Mening buyurtmalarim (${allOrders.length})</h3>
+                ${allOrders.length ? allOrders.map(o => `
+                  <div style="border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:12px;background:var(--bg)">
+                    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+                      <b>Buyurtma #${escapeHtml(o.id)} · ${escapeHtml(o.date)}</b>
+                      <span class="p-pill-stock">${escapeHtml(o.status)}</span>
+                    </div>
+                    <p style="font-size:13px;color:var(--muted);margin:8px 0">📍 Yetkazish manzili: ${escapeHtml(o.address)}</p>
+                    <div style="font-size:13px;display:flex;justify-content:space-between;padding-top:8px;border-top:1px dashed var(--line)">
+                      <span>${o.items.map(i => `${escapeHtml(i.name)} (${i.qty} ${escapeHtml(i.unit)})`).join(", ")}</span>
+                      <b style="color:var(--emerald)">${fmt(o.total)}</b>
+                    </div>
+                  </div>
+                `).join("") : `<div style="padding:30px;text-align:center;color:var(--muted)">Sizda hozircha faol buyurtmalar yo‘q.</div>`}
+              </div>
+            ` : ''}
+
+            ${tab === 'favs' ? `
+              <div class="dash-card-box">
+                <h3 style="font-size:22px;margin-bottom:14px">♥ Sevimli mahsulotlarim</h3>
+                ${favProducts.length ? `
+                  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px">
+                    ${favProducts.map(p => `
+                      <div style="border:1px solid var(--line);border-radius:16px;padding:14px;background:var(--bg)">
+                        <img src="${p.img}" alt="" style="width:100%;height:140px;object-fit:cover;border-radius:12px;margin-bottom:10px" />
+                        <b>${escapeHtml(p.name)}</b>
+                        <div style="font-size:12px;color:var(--muted);margin:4px 0">📍 ${escapeHtml(p.region)} · 📦 ${escapeHtml(p.quantity)}</div>
+                        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
+                          <b style="color:var(--emerald)">${fmt(p.price)}</b>
+                          <button type="button" class="p-add" onclick="openProductDetail(${p.id})">Ko‘rish</button>
+                        </div>
+                      </div>
+                    `).join("")}
+                  </div>
+                ` : `<div style="padding:30px;text-align:center;color:var(--muted)">Sevimlilar ro‘yxati bo‘sh.</div>`}
+              </div>
+            ` : ''}
+
+            ${tab === 'profile' ? `
+              <div class="dash-card-box">
+                <h3 style="font-size:22px;margin-bottom:14px">⚙️ Shaxsiy ma’lumotlar va manzil</h3>
+                <form class="form-grid" id="customerProfileForm">
+                  <div class="form-row">
+                    <label>Ism va familiya<input name="name" value="${escapeHtml(customer.name)}" required /></label>
+                    <label>Telefon raqam<input name="phone" value="${escapeHtml(customer.phone)}" required /></label>
+                  </div>
+                  <div class="form-row">
+                    <label>Viloyat<input name="region" value="${escapeHtml(customer.region)}" required /></label>
+                    <label>Yetkazib berish manzili<input name="address" value="${escapeHtml(customer.address || '')}" required /></label>
+                  </div>
+                  <button type="submit" class="btn-primary" style="width:fit-content">Saqlash ✓</button>
+                </form>
+              </div>
+            ` : ''}
+          </div>
+        </div>
+      `;
+
+      container.querySelectorAll("[data-ctab]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          state.customerDashTab = btn.dataset.ctab;
+          renderCustomerPortal();
+        });
+      });
+
+      const logoutBtn = $("#customerLogoutBtn");
+      if (logoutBtn) logoutBtn.addEventListener("click", () => {
+        setCurrentCustomer(null);
+        state.customerAuthMode = "login";
+        renderCustomerPortal();
+        toast("🚪 Xaridor kabinetidan chiqdingiz");
+      });
+
+      const profForm = $("#customerProfileForm");
+      if (profForm) {
+        profForm.addEventListener("submit", e => {
+          e.preventDefault();
+          const d = Object.fromEntries(new FormData(profForm).entries());
+          setCurrentCustomer({ ...customer, ...d });
+          renderCustomerPortal();
+          toast("✓ Xaridor ma’lumotlari saqlandi!");
+        });
+      }
+    }
+
+    /* =====================================================
+       FERMER PORTALI (KIRISH / RO'YXATDAN O'TISH / KABINET)
+       ===================================================== */
+    function renderFarmerPortal() {
+      const farmer = getCurrentFarmer();
+      const container = $("#farmerPortalDynamic");
+      if (!farmer) {
+        renderFarmerAuthView(container);
+      } else {
+        renderFarmerDashboardView(container, farmer);
+      }
+    }
+
+    function renderFarmerAuthView(container) {
+      const isLogin = state.farmerAuthMode === "login";
+      container.innerHTML = `
+        <div class="portal-auth-layout">
+          <div class="portal-promo-panel">
+            <div>
+              <span class="hero-tag">🌾 DEHQONBOZOR FERMERLAR PORTALI</span>
+              <h1>Hosilingizni vositachilarsiz, o‘z narxingizda soting.</h1>
+              <p>O‘zbekiston bo‘ylab minglab xonadonlar, restoranlar va ulgurji xaridorlar sizning yangi hosilingizni kutmoqda. Ro‘yxatdan o‘ting va shaxsiy onlayn rastangizni oching.</p>
+
+              <div class="portal-perks-list">
+                <div class="portal-perk-item">
+                  <div class="portal-perk-icon">📞</div>
+                  <div>
+                    <b>Xaridorlar sizga to‘g‘ridan-to‘g‘ri qo‘ng‘iroq qiladi</b>
+                    <small>Mahsulotingiz manzili, qoldiq miqdori va telefon raqamingiz xaridorlarga ochiq ko‘rinadi.</small>
+                  </div>
+                </div>
+                <div class="portal-perk-item">
+                  <div class="portal-perk-icon">🚚</div>
+                  <div>
+                    <b>Tayyor logistika yoki daladan olib ketish</b>
+                    <small>Xaridorlar o‘zlari kelib olib ketishi yoki kuryer orqali yetkazib berishni tanlashi mumkin.</small>
+                  </div>
+                </div>
+                <div class="portal-perk-item">
+                  <div class="portal-perk-icon">📊</div>
+                  <div>
+                    <b>Shaxsiy kabinet va zaxira boshqaruvi</b>
+                    <small>Mahsulot qo‘shish, qancha kg/tonna qolganini ko‘rsatish va buyurtmalarni boshqarish.</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="font-size:12.5px; color:rgba(255,255,255,0.75)">
+              ☎ Fermerlarni qo‘llab-quvvatlash markazi: <b>+998 (71) 200-40-40</b>
+            </div>
+          </div>
+
+          <div class="portal-auth-card">
+            <div class="auth-tabs">
+              <button type="button" class="auth-tab-btn ${isLogin ? 'active' : ''}" id="tabLoginBtn">
+                🔑 Fermer bo‘lib kirish
+              </button>
+              <button type="button" class="auth-tab-btn ${!isLogin ? 'active' : ''}" id="tabRegisterBtn">
+                📝 Ro‘yxatdan o‘tish
+              </button>
+            </div>
+
+            ${isLogin ? `
+              <div>
+                <h2 style="font-size:26px;margin-bottom:6px">Xush kelibsiz, ustoz dehqon!</h2>
+                <p style="color:var(--muted);font-size:13.5px;margin-bottom:18px">Shaxsiy fermer kabinetingizga kirish uchun telefon raqamingiz va parolingizni kiriting.</p>
+                <form class="form-grid" id="farmerLoginForm">
+                  <label>Telefon raqamingiz
+                    <input name="phone" type="tel" required placeholder="+998 90 123 45 67" value="+998 90 123 45 67" />
+                  </label>
+                  <label>Parol
+                    <input name="password" type="password" required placeholder="••••••••" value="1234" />
+                  </label>
+                  <button type="submit" class="btn-primary" style="width:100%;margin-top:6px;padding:15px">
+                    Kabinetga kirish →
+                  </button>
+                </form>
+
+                <div class="auth-demo-box">
+                  <span>💡 <b>Demo fermer:</b> Telefon: <code>+998 90 123 45 67</code> · Parol: <code>1234</code></span>
+                </div>
+              </div>
+            ` : `
+              <div>
+                <h2 style="font-size:26px;margin-bottom:6px">Yangi fermer sifatida qo‘shiling</h2>
+                <p style="color:var(--muted);font-size:13.5px;margin-bottom:18px">Ma’lumotlarni to‘ldiring va darhol mahsulotlaringizni sotuvga chiqaring.</p>
+                <form class="form-grid" id="farmerRegisterForm">
+                  <div class="form-row">
+                    <label>Ism va familiyangiz
+                      <input name="name" required placeholder="Masalan: Bahrom Rahimov" />
+                    </label>
+                    <label>Fermer xo‘jaligi / Brend nomi
+                      <input name="farm" required placeholder="Masalan: Buvayda Bog‘lari" />
+                    </label>
+                  </div>
+                  <div class="form-row">
+                    <label>Bog‘lanish uchun telefon raqam
+                      <input name="phone" type="tel" required placeholder="+998 90 123 45 67" />
+                    </label>
+                    <label>Hudud (Viloyat)
+                      <select name="region" required>
+                        <option>Toshkent</option><option>Samarqand</option><option>Farg‘ona</option>
+                        <option>Surxondaryo</option><option>Andijon</option><option>Namangan</option>
+                        <option>Buxoro</option><option>Qashqadaryo</option><option>Xorazm</option>
+                      </select>
+                    </label>
+                  </div>
+                  <div class="form-row">
+                    <label>Asosiy yo‘nalishingiz
+                      <select name="specialization">
+                        <option>Sabzavotlar va ko‘katlar</option>
+                        <option>Bog‘dorchilik (Mevalar)</option>
+                        <option>Sut va qishloq mahsulotlari</option>
+                        <option>Poliz ekinlari va asal</option>
+                        <option>Parrandachilik va don</option>
+                      </select>
+                    </label>
+                    <label>Parol o‘ylab toping
+                      <input name="password" type="password" minlength="4" required placeholder="Kamida 4 ta belgi" />
+                    </label>
+                  </div>
+                  <button type="submit" class="btn-primary" style="width:100%;margin-top:6px;padding:15px">
+                    Ro‘yxatdan o‘tish va kabinetni ochish →
+                  </button>
+                </form>
+              </div>
+            `}
+          </div>
+        </div>
+      `;
+
+      $("#tabLoginBtn").addEventListener("click", () => {
+        state.farmerAuthMode = "login";
+        renderFarmerPortal();
+      });
+      $("#tabRegisterBtn").addEventListener("click", () => {
+        state.farmerAuthMode = "register";
+        renderFarmerPortal();
+      });
+
+      const loginForm = $("#farmerLoginForm");
+      if (loginForm) {
+        loginForm.addEventListener("submit", e => {
+          e.preventDefault();
+          const d = Object.fromEntries(new FormData(loginForm).entries());
+          const farmers = readLS("db_orig_farmers", defaultFarmers);
+          const found = farmers.find(f => cleanPhone(f.phone) === cleanPhone(d.phone) && f.password === d.password);
+          if (!found) {
+            toast("❌ Telefon raqam yoki parol noto‘g‘ri!");
+            return;
+          }
+          setCurrentFarmer(found);
+          state.farmerDashTab = "overview";
+          renderFarmerPortal();
+          toast(`👋 Xush kelibsiz, ${found.name}!`);
+        });
+      }
+
+      const regForm = $("#farmerRegisterForm");
+      if (regForm) {
+        regForm.addEventListener("submit", e => {
+          e.preventDefault();
+          const d = Object.fromEntries(new FormData(regForm).entries());
+          const farmers = readLS("db_orig_farmers", defaultFarmers);
+          if (farmers.some(f => cleanPhone(f.phone) === cleanPhone(d.phone))) {
+            toast("⚠️ Bu telefon raqam allaqachon ro‘yxatdan o‘tgan. Kirish bo‘limiga o‘ting.");
+            state.farmerAuthMode = "login";
+            renderFarmerPortal();
+            return;
+          }
+          const newFarmer = {
+            name: d.name.trim(),
+            farm: d.farm.trim(),
+            phone: d.phone.trim(),
+            region: d.region,
+            specialization: d.specialization,
+            password: d.password,
+            createdAt: new Date().toISOString().slice(0, 10)
+          };
+          farmers.push(newFarmer);
+          saveLS("db_orig_farmers", farmers);
+          setCurrentFarmer(newFarmer);
+          state.farmerDashTab = "overview";
+          renderFarmerPortal();
+          toast(`🎉 Tabriklaymiz, "${newFarmer.farm}" kabineti ochildi!`);
+        });
+      }
+    }
+
+    function renderFarmerDashboardView(container, farmer) {
+      const myProducts = products.filter(p =>
+        (p.farmerPhone && cleanPhone(p.farmerPhone) === cleanPhone(farmer.phone)) ||
+        p.farmer.toLowerCase() === farmer.farm.toLowerCase()
+      );
+      const allOrders = readLS("db_orig_orders", []);
+      const totalRevenue = allOrders.reduce((s, o) => s + (Number(o.total) || 0), 0);
+      const tab = state.farmerDashTab;
+
+      container.innerHTML = `
+        <div class="portal-dash-layout">
+          <aside class="portal-sidebar">
+            <div class="portal-profile-mini">
+              <div class="portal-avatar-lg">👨‍🌾</div>
+              <b style="font-size:16px;display:block">${escapeHtml(farmer.farm)}</b>
+              <small style="color:var(--muted);display:block;margin-top:2px">${escapeHtml(farmer.name)} · ${escapeHtml(farmer.region)}</small>
+              <span class="portal-verified-pill">📞 ${escapeHtml(farmer.phone)}</span>
+            </div>
+
+            <nav class="portal-nav-list">
+              <button type="button" class="portal-nav-btn ${tab==='overview'?'active':''}" data-ftab="overview">
+                📊 Umumiy ko‘rinish
+              </button>
+              <button type="button" class="portal-nav-btn ${tab==='products'?'active':''}" data-ftab="products">
+                🥬 Mahsulotlarim (${myProducts.length})
+              </button>
+              <button type="button" class="portal-nav-btn ${tab==='add'?'active':''}" data-ftab="add">
+                ➕ Yangi hosil qo‘shish
+              </button>
+              <button type="button" class="portal-nav-btn ${tab==='orders'?'active':''}" data-ftab="orders">
+                📦 Buyurtmalar (${allOrders.length})
+              </button>
+              <button type="button" class="portal-nav-btn ${tab==='profile'?'active':''}" data-ftab="profile">
+                👤 Xo‘jalik profili
+              </button>
+              <button type="button" class="portal-nav-btn logout-btn" id="farmerLogoutBtn">
+                🚪 Akkauntdan chiqish
+              </button>
+            </nav>
+          </aside>
+
+          <div class="portal-main-panel">
+            <div class="dash-banner">
+              <div>
+                <span class="hero-tag" style="margin-bottom:8px">🌱 SHAXSIY FERMER KABINETI</span>
+                <h2>Salom, ${escapeHtml(farmer.name)}!</h2>
+                <p>${escapeHtml(farmer.farm)} (${escapeHtml(farmer.region)}) · Telefon: ${escapeHtml(farmer.phone)}</p>
+              </div>
+              <div style="display:flex;gap:10px;flex-wrap:wrap">
+                <button type="button" class="btn-gold" id="quickAddProductBtn">+ Yangi mahsulot qo‘shish</button>
+                <button type="button" class="btn-glass" onclick="switchToMarket()">Bozorni ko‘rish ↗</button>
+              </div>
+            </div>
+
+            ${tab === 'overview' ? `
+              <div class="dash-stats-grid">
+                <div class="dash-stat-card">
+                  <small>Sotuvdagi mahsulotlarim</small>
+                  <strong>${myProducts.length} ta</strong>
+                  <span>● Manzil va telefon ochiq</span>
+                </div>
+                <div class="dash-stat-card">
+                  <small>Jami buyurtmalar</small>
+                  <strong>${allOrders.length} ta</strong>
+                  <span>● Bozor bo‘yicha</span>
+                </div>
+                <div class="dash-stat-card">
+                  <small>Umumiy aylanma</small>
+                  <strong style="font-size:21px">${fmt(totalRevenue)}</strong>
+                  <span>+14% o‘sish</span>
+                </div>
+                <div class="dash-stat-card">
+                  <small>Fermer reytingi</small>
+                  <strong>4.9 ★</strong>
+                  <span>Ishonchli sotuvchi</span>
+                </div>
+              </div>
+
+              <div class="dash-card-box">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+                  <h3 style="margin:0;font-size:20px">Mening so‘nggi mahsulotlarim</h3>
+                  <button type="button" class="btn-secondary" data-ftab="add" style="padding:8px 14px;font-size:12px">+ Yana qo‘shish</button>
+                </div>
+                ${renderFarmerProductsTable(myProducts)}
+              </div>
+            ` : ''}
+
+            ${tab === 'products' ? `
+              <div class="dash-card-box">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px">
+                  <div>
+                    <h3 style="margin:0;font-size:22px">Mening mahsulotlarim (${myProducts.length})</h3>
+                    <p style="margin:4px 0 0;color:var(--muted);font-size:13px">Xaridorlar mahsulot ustiga bosganda manzilingiz, qoldiq miqdor va telefon raqamingizni ko‘radi.</p>
+                  </div>
+                  <button type="button" class="btn-primary" data-ftab="add">+ Yangi hosil qo‘shish</button>
+                </div>
+                ${renderFarmerProductsTable(myProducts)}
+              </div>
+            ` : ''}
+
+            ${tab === 'add' ? `
+              <div class="dash-card-box">
+                <h3 style="font-size:22px;margin-bottom:6px">➕ Yangi hosilni sotuvga chiqarish</h3>
+                <p style="color:var(--muted);font-size:13px;margin-bottom:18px">Mahsulot qayerda ekani va qancha miqdorda borligini aniq kiriting — bu xaridor ishonchini oshiradi.</p>
+                <form class="form-grid" id="pageAddProductForm">
+                  <div class="form-row">
+                    <label>Mahsulot nomi
+                      <input name="name" required placeholder="Masalan: Qandak o‘rik (1-sort)" />
+                    </label>
+                    <label>Kategoriya
+                      <select name="category">
+                        <option>Sabzavotlar</option>
+                        <option>Mevalar</option>
+                        <option>Sut mahsulotlari</option>
+                        <option>Go‘sht va tuxum</option>
+                        <option>Poliz va asal</option>
+                      </select>
+                    </label>
+                  </div>
+                  <div class="form-row">
+                    <label>Narxi (so‘mda)
+                      <input name="price" type="number" min="500" required placeholder="Masalan: 14000" />
+                    </label>
+                    <label>Sotuv birligi
+                      <select name="unit">
+                        <option>kg</option><option>litr</option><option>dona</option><option>10 dona</option><option>500 g</option><option>qop (25 kg)</option>
+                      </select>
+                    </label>
+                  </div>
+                  <div class="form-row">
+                    <label>📦 Hozir qancha miqdorda bor? (Zaxira)
+                      <input name="quantity" required placeholder="Masalan: 650 kg yoki 120 quti" />
+                    </label>
+                    <label>📍 Mahsulot qayerda? (Tuman, qishloq, mo‘ljal)
+                      <input name="locationDetail" required placeholder="Masalan: Quva tumani, Soybo‘yi MFY, 4-bog‘" />
+                    </label>
+                  </div>
+                  <div class="form-row">
+                    <label>📞 Xaridor bog‘lanishi uchun telefon
+                      <input name="farmerPhone" type="tel" required value="${escapeHtml(farmer.phone)}" />
+                    </label>
+                    <label>Maxsus belgi (yorliq)
+                      <select name="badge">
+                        <option>Bugungi terim</option>
+                        <option>100% Tabiiy</option>
+                        <option>Eksportbop</option>
+                        <option>Shirin hosil</option>
+                      </select>
+                    </label>
+                  </div>
+                  <label>Rasm URL havolasi (ixtiyoriy)
+                    <input name="img" type="url" placeholder="https://images.unsplash.com/..." />
+                  </label>
+                  <label>Mahsulot haqida batafsil ma’lumot
+                    <textarea name="desc" rows="3" placeholder="Qachon uzilgani, ta’mi, yetkazib berish yoki olib ketish shartlari..."></textarea>
+                  </label>
+                  <div style="display:flex;gap:12px;margin-top:8px">
+                    <button type="submit" class="btn-primary">✓ Rastaga joylashtirish</button>
+                    <button type="button" class="btn-secondary" data-ftab="products">Bekor qilish</button>
+                  </div>
+                </form>
+              </div>
+            ` : ''}
+
+            ${tab === 'orders' ? `
+              <div class="dash-card-box">
+                <h3 style="font-size:22px;margin-bottom:6px">📦 Xaridor buyurtmalari</h3>
+                <p style="color:var(--muted);font-size:13px;margin-bottom:18px">Buyurtma holatini o‘zgartirsangiz, xaridorga darhol ko‘rinadi.</p>
+                ${allOrders.length ? allOrders.map((o, idx) => `
+                  <div style="border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:12px;background:var(--bg)">
+                    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+                      <div>
+                        <b style="font-size:15px">#${escapeHtml(o.id)}</b> · <span style="color:var(--muted);font-size:12.5px">${escapeHtml(o.date)}</span>
+                        <div style="font-size:13px;margin-top:4px">👤 Xaridor: <b>${escapeHtml(o.customer)}</b> (<a href="tel:${escapeHtml(o.phone)}" style="color:var(--emerald);font-weight:700">${escapeHtml(o.phone)}</a>) · 📍 ${escapeHtml(o.address)}</div>
+                      </div>
+                      <div style="display:flex;align-items:center;gap:8px">
+                        <select data-order-idx="${idx}" class="order-status-select" style="padding:8px 12px;border-radius:99px;border:1px solid var(--line);background:var(--card);font-size:12px;font-weight:700">
+                          <option ${o.status.includes('Yangi')?'selected':''}>Yangi — Fermer tayyorlamoqda</option>
+                          <option ${o.status.includes('Yo‘lda')?'selected':''}>Yo‘lda — Kuryerga topshirildi</option>
+                          <option ${o.status.includes('Yetkazildi')?'selected':''}>Yetkazildi — Yakunlandi ✓</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div style="margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);display:flex;justify-content:space-between;font-size:13px">
+                      <span>🧺 ${o.items.map(i => `${escapeHtml(i.name)} (${i.qty} ${escapeHtml(i.unit)})`).join(", ")}</span>
+                      <b style="color:var(--emerald)">${fmt(o.total)}</b>
+                    </div>
+                  </div>
+                `).join("") : `<div style="padding:30px;text-align:center;color:var(--muted)">Hozircha buyurtmalar yo‘q.</div>`}
+              </div>
+            ` : ''}
+
+            ${tab === 'profile' ? `
+              <div class="dash-card-box">
+                <h3 style="font-size:22px;margin-bottom:14px">👤 Fermer xo‘jaligi ma’lumotlari</h3>
+                <form class="form-grid" id="farmerProfileForm">
+                  <div class="form-row">
+                    <label>Ism va familiya<input name="name" value="${escapeHtml(farmer.name)}" required /></label>
+                    <label>Xo‘jalik nomi<input name="farm" value="${escapeHtml(farmer.farm)}" required /></label>
+                  </div>
+                  <div class="form-row">
+                    <label>Telefon raqam<input name="phone" value="${escapeHtml(farmer.phone)}" required /></label>
+                    <label>Viloyat<input name="region" value="${escapeHtml(farmer.region)}" required /></label>
+                  </div>
+                  <label>Yo‘nalish<input name="specialization" value="${escapeHtml(farmer.specialization || 'Ko‘p tarmoqli')}" /></label>
+                  <button type="submit" class="btn-primary" style="width:fit-content">O‘zgarishlarni saqlash ✓</button>
+                </form>
+              </div>
+            ` : ''}
+          </div>
+        </div>
+      `;
+
+      container.querySelectorAll("[data-ftab]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          state.farmerDashTab = btn.dataset.ftab;
+          renderFarmerPortal();
+        });
+      });
+
+      const quickAdd = $("#quickAddProductBtn");
+      if (quickAdd) quickAdd.addEventListener("click", () => {
+        state.farmerDashTab = "add";
+        renderFarmerPortal();
+      });
+
+      const logoutBtn = $("#farmerLogoutBtn");
+      if (logoutBtn) logoutBtn.addEventListener("click", () => {
+        setCurrentFarmer(null);
+        state.farmerAuthMode = "login";
+        renderFarmerPortal();
+        toast("🚪 Fermer kabinetidan chiqdingiz");
+      });
+
+      container.querySelectorAll("[data-del-prod]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const id = Number(btn.dataset.delProd);
+          const idx = products.findIndex(p => p.id === id);
+          if (idx > -1) products.splice(idx, 1);
+          const saved = readLS("db_orig_farmer_products", []).filter(p => p.id !== id);
+          saveLS("db_orig_farmer_products", saved);
+          renderFarmerPortal();
+          toast("🗑️ Mahsulot rastadan olib tashlandi");
+        });
+      });
+
+      const addForm = $("#pageAddProductForm");
+      if (addForm) {
+        addForm.addEventListener("submit", e => {
+          e.preventDefault();
+          const d = Object.fromEntries(new FormData(addForm).entries());
+          const item = {
+            id: Date.now(),
+            name: d.name.trim(),
+            category: d.category,
+            price: Number(d.price),
+            unit: d.unit,
+            quantity: d.quantity.trim(),
+            locationDetail: d.locationDetail.trim(),
+            harvestTime: "Bugun yangi kiritilgan",
+            badge: d.badge,
+            farmer: farmer.farm,
+            farmerOwner: farmer.name,
+            farmerPhone: d.farmerPhone.trim() || farmer.phone,
+            region: farmer.region,
+            rating: 5.0,
+            img: d.img.trim() || "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=700&q=80",
+            desc: d.desc.trim() || "Dehqondan to‘g‘ridan-to‘g‘ri yangi mahsulot."
+          };
+          products.unshift(item);
+          const saved = readLS("db_orig_farmer_products", []);
+          saved.unshift(item);
+          saveLS("db_orig_farmer_products", saved);
+          state.farmerDashTab = "products";
+          renderFarmerPortal();
+          toast(`🌱 "${item.name}" manzili va miqdori bilan sotuvga chiqarildi!`);
+        });
+      }
+
+      container.querySelectorAll(".order-status-select").forEach(sel => {
+        sel.addEventListener("change", () => {
+          const idx = Number(sel.dataset.orderIdx);
+          const orders = readLS("db_orig_orders", []);
+          if (orders[idx]) {
+            orders[idx].status = sel.value;
+            saveLS("db_orig_orders", orders);
+            toast("📦 Buyurtma holati yangilandi!");
+          }
+        });
+      });
+
+      const profForm = $("#farmerProfileForm");
+      if (profForm) {
+        profForm.addEventListener("submit", e => {
+          e.preventDefault();
+          const d = Object.fromEntries(new FormData(profForm).entries());
+          setCurrentFarmer({ ...farmer, ...d });
+          renderFarmerPortal();
+          toast("✓ Profil ma’lumotlari yangilandi!");
+        });
+      }
+    }
+
+    function renderFarmerProductsTable(list) {
+      if (!list.length) {
+        return `<div style="padding:32px;text-align:center;border:1px dashed var(--line);border-radius:16px;color:var(--muted)">
+          Hozircha mahsulot qo‘shmagansiz. <b>"+ Yangi hosil qo‘shish"</b> tugmasini bosing.
+        </div>`;
+      }
+      return `
+        <div style="overflow-x:auto">
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>Mahsulot</th>
+                <th>Aniq joylashuvi</th>
+                <th>Narx</th>
+                <th>Ombordagi qoldiq</th>
+                <th>Amal</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${list.map(p => `
+                <tr>
+                  <td>
+                    <img src="${escapeHtml(p.img)}" alt="" />
+                    <b>${escapeHtml(p.name)}</b>
+                  </td>
+                  <td>📍 ${escapeHtml(p.region)}, ${escapeHtml(p.locationDetail || 'Markaziy dala')}</td>
+                  <td><b>${fmt(p.price)}</b> / ${escapeHtml(p.unit)}</td>
+                  <td><span class="p-pill-stock">📦 ${escapeHtml(p.quantity || 'Mavjud')}</span></td>
+                  <td>
+                    <button type="button" class="btn-danger-sm" data-del-prod="${p.id}">O‘chirish</button>
+                  </td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    /* =====================================================
+       KATALOG VA MAHSULOT USTIGA BOSGANDA DETAIL + TELEFON ALOQA
+       ===================================================== */
+    function renderCatalog() {
+      let list = products.filter(p => {
+        const matchCat = state.category === "Barchasi" || p.category === state.category;
+        const text = `${p.name} ${p.farmer} ${p.region} ${p.locationDetail || ''} ${p.category}`.toLowerCase();
+        const matchQ = !state.query || text.includes(state.query.toLowerCase());
+        const matchReg = !state.region || p.region === state.region;
+        const matchPrice = !state.maxPrice || p.price <= state.maxPrice;
+        const matchFav = !state.onlyFav || state.favs.has(p.id);
+        return matchCat && matchQ && matchReg && matchPrice && matchFav;
+      });
+
+      if (state.sort === "cheap") list.sort((a,b) => a.price - b.price);
+      if (state.sort === "expensive") list.sort((a,b) => b.price - a.price);
+      if (state.sort === "rating") list.sort((a,b) => b.rating - a.rating);
+
+      $("#resultCounter").textContent = `${list.length} xil mahsulot mavjud`;
+
+      const grid = $("#productGrid");
+      if (!list.length) {
+        grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:48px;background:var(--card);border-radius:20px;border:1px dashed var(--line)">
+          <h3 style="margin-bottom:8px">Mos mahsulot topilmadi</h3>
+          <p style="color:var(--muted)">Qidiruv so‘zini o‘zgartiring yoki filtrlarni tozalang.</p>
+        </div>`;
+        return;
+      }
+
+      grid.innerHTML = list.map(p => {
+        const liked = state.favs.has(p.id);
+        const cashback = Math.round(p.price * 0.02);
+        return `<article class="p-card">
+          <div class="p-media" onclick="openProductDetail(${p.id})">
+            <img src="${p.img}" alt="${escapeHtml(p.name)}" loading="lazy" />
+            <span class="p-badge">${escapeHtml(p.badge || "Yangi hosil")}</span>
+            <span class="p-cashback">+${fmt(cashback)} keshbek</span>
+            <button type="button" class="p-fav ${liked?'liked':''}" onclick="event.stopPropagation();toggleFav(${p.id})" aria-label="Sevimli">${liked?'♥':'♡'}</button>
+          </div>
+          <div class="p-body">
+            <div class="p-farmer"><span>👨‍🌾</span> <b>${escapeHtml(p.farmer)}</b> · ★ ${p.rating.toFixed(1)}</div>
+            <h3 class="p-title" onclick="openProductDetail(${p.id})">${escapeHtml(p.name)}</h3>
+            <div class="p-info-pills" onclick="openProductDetail(${p.id})" style="cursor:pointer">
+              <span class="p-pill-loc">📍 ${escapeHtml(p.region)}, ${escapeHtml((p.locationDetail || '').split(',')[0] || 'Dala')}</span>
+              <span class="p-pill-stock">📦 ${escapeHtml(p.quantity || 'Mavjud')}</span>
+            </div>
+            <div class="p-foot">
+              <div class="p-price">${fmt(p.price)} <small>/ ${escapeHtml(p.unit)}</small></div>
+              <div style="display:flex;gap:6px">
+                <button type="button" class="btn-secondary" style="padding:8px 11px;font-size:12px" onclick="openProductDetail(${p.id})" title="Manzil va Fermer telefoni">📞 Aloqa</button>
+                <button type="button" class="p-add" onclick="addToCart(${p.id})">+ Savat</button>
+              </div>
+            </div>
+          </div>
+        </article>`;
+      }).join("");
+    }
+
+    function openProductDetail(id) {
+      const p = products.find(x => x.id === id);
+      if (!p) return;
+      const phone = p.farmerPhone || "+998 90 123 45 67";
+      const telHref = "tel:" + cleanPhone(phone);
+      const locationFull = `${p.region} viloyati, ${p.locationDetail || 'Markaziy fermer xo‘jaligi'}`;
+
+      openModal(`
+        <div class="detail-grid-box">
+          <div>
+            <img src="${p.img}" alt="${escapeHtml(p.name)}" style="width:100%;height:260px;object-fit:cover;border-radius:20px;box-shadow:var(--shadow-sm)" />
+            <div class="detail-loc-stock-box">
+              <div class="detail-info-card">
+                <small>📍 MAHSULOT QAYERDA?</small>
+                <b>${escapeHtml(locationFull)}</b>
+              </div>
+              <div class="detail-info-card" style="background:var(--emerald-light)">
+                <small style="color:var(--emerald)">📦 QANCHA MIQDORDA BOR?</small>
+                <b style="color:var(--emerald);font-size:15px">${escapeHtml(p.quantity || '400 kg')} mavjud</b>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <span class="sec-kicker">${escapeHtml(p.category)} · ${escapeHtml(p.harvestTime || 'Yangi terilgan')}</span>
+            <h2 style="margin:4px 0 8px;font-size:26px">${escapeHtml(p.name)}</h2>
+            <p style="color:var(--muted);font-size:13.5px;margin-bottom:12px">${escapeHtml(p.desc)}</p>
+
+            <div style="font-size:26px;font-weight:800;color:var(--emerald);margin-bottom:14px">
+              ${fmt(p.price)} <small style="font-size:13px;color:var(--muted);font-weight:600">/ ${escapeHtml(p.unit)}</small>
+            </div>
+
+            <!-- FERMER BILAN BEVOSITA TELEFON ALOQA BLOKI -->
+            <div class="farmer-call-box">
+              <div class="farmer-call-top">
+                <div>
+                  <small style="font-size:11px;font-weight:800;color:var(--emerald);display:block">👨‍🌾 BEVOSITA FERMER ALOQASI</small>
+                  <b style="font-size:15px">${escapeHtml(p.farmer)} (${escapeHtml(p.farmerOwner || 'Mas’ul dehqon')})</b>
+                </div>
+                <span class="p-pill-stock" style="background:#fff">★ ${p.rating.toFixed(1)}</span>
+              </div>
+              <div style="font-size:15px;font-weight:800;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;background:var(--card);padding:10px 14px;border-radius:12px;border:1px solid var(--line)">
+                <span>☎ ${escapeHtml(phone)}</span>
+                <button type="button" style="font-size:11.5px;font-weight:800;color:var(--emerald)" onclick="navigator.clipboard?.writeText('${escapeHtml(phone)}');toast('📋 Telefon raqam nusxalandi!')">Nusxalash</button>
+              </div>
+              <a href="${telHref}" class="call-now-btn" onclick="toast('📞 Fermer raqamiga qo‘ng‘iroq qilinmoqda: ${escapeHtml(phone)}')">
+                📞 Fermerga hozir qo‘ng‘iroq qilish
+              </a>
+            </div>
+
+            <div style="display:flex;gap:10px;margin-top:14px">
+              <button type="button" class="btn-primary" style="flex:1" onclick="addToCart(${p.id});closeModal()">
+                🛒 Savatga qo‘shish
+              </button>
+            </div>
+          </div>
+        </div>
+      `);
+    }
+
+    function toggleFav(id) {
+      if (state.favs.has(id)) state.favs.delete(id);
+      else state.favs.add(id);
+      saveLS("db_orig_favs", [...state.favs]);
+      renderCatalog();
+    }
+
+    function addToCart(id, customQty = 1) {
+      const p = products.find(x => x.id === id);
+      if (!p) return;
+      const found = state.cart.find(x => x.id === id);
+      if (found) found.qty += customQty;
+      else state.cart.push({ id: p.id, name: p.name, price: p.price, unit: p.unit, img: p.img, qty: customQty });
+      saveLS("db_orig_cart", state.cart);
+      updateHeaderBadges();
+      toast(`🧺 "${p.name}" savatchaga qo‘shildi!`);
+    }
+
+    function addBundleToCart(title, price) {
+      const bundleId = 9000 + Math.floor(Math.random() * 999);
+      state.cart.push({
+        id: bundleId,
+        name: `📦 ${title} (Obuna)`,
+        price: price,
+        unit: "to‘plam",
+        img: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=300&q=80",
+        qty: 1
+      });
+      saveLS("db_orig_cart", state.cart);
+      updateHeaderBadges();
+      openCartModal();
+      toast(`🎁 "${title}" savatga qo‘shildi!`);
+    }
+
+    function addRecipeToCart(ids, recipeName) {
+      ids.forEach(id => addToCart(id, 1));
+      openCartModal();
+      toast(`🍲 "${recipeName}" barcha masalliqlari savatda!`);
+    }
+
+    function openModal(html) {
+      $("#modalBody").innerHTML = html;
+      $("#modalBackdrop").classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
+    function closeModal() {
+      $("#modalBackdrop").classList.remove("open");
+      document.body.style.overflow = "";
+    }
+
+    function openCartModal() {
+      if (!state.cart.length) {
+        openModal(`
+          <div style="text-align:center;padding:24px 0">
+            <div style="font-size:48px;margin-bottom:10px">🧺</div>
+            <h2>Savatchangiz bo‘sh</h2>
+            <p style="color:var(--muted)">Daladan yangi uzilgan mahsulotlarni tanlab savatni to‘ldiring.</p>
+          </div>
+        `);
+        return;
+      }
+
+      const cust = getCurrentCustomer();
+      const subtotal = state.cart.reduce((s, i) => s + i.price * i.qty, 0);
+      const freeGoal = 150000;
+      const pct = Math.min(100, (subtotal / freeGoal) * 100);
+      const earnCashback = Math.round(subtotal * 0.02);
+
+      openModal(`
+        <h2>🛒 Savatcha</h2>
+        <div class="shipping-bar-wrap">
+          ${subtotal >= freeGoal
+            ? `🎉 <b>Tabriklaymiz!</b> Buyurtmangiz uyingizgacha <b>BEPUL</b> yetkazib beriladi.`
+            : `🚚 Bepul yetkazib berish uchun yana <b>${fmt(freeGoal - subtotal)}</b> lik mahsulot qo‘shing.`}
+          <div class="shipping-track"><div class="shipping-fill" style="width:${pct}%"></div></div>
+        </div>
+        <div>
+          ${state.cart.map(i => `
+            <div class="cart-row">
+              <img src="${i.img}" alt="" />
+              <div>
+                <b>${escapeHtml(i.name)}</b><br>
+                <small style="color:var(--muted)">${fmt(i.price)} / ${escapeHtml(i.unit)}</small><br>
+                <div class="qty-box">
+                  <button type="button" onclick="changeQty(${i.id}, -1)">−</button>
+                  <span>${i.qty}</span>
+                  <button type="button" onclick="changeQty(${i.id}, 1)">+</button>
+                </div>
+              </div>
+              <div style="font-weight:800">${fmt(i.price * i.qty)}</div>
+            </div>
+          `).join("")}
+        </div>
+        <div style="margin:16px 0;padding:12px;border-radius:12px;background:var(--harvest-light);font-size:12.5px">
+          💰 Ushbu xariddan hamyoningizga <b>+${fmt(earnCashback)} (2%) keshbek</b> tushadi!
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:18px;font-weight:800;margin-bottom:16px">
+          <span>Jami to‘lov:</span>
+          <span style="color:var(--emerald)">${fmt(subtotal)}</span>
+        </div>
+        <form class="form-grid" id="checkoutForm">
+          <div class="form-row">
+            <label>Ismingiz<input name="name" required value="${escapeHtml(cust?.name || '')}" placeholder="Sardor Alimov" /></label>
+            <label>Telefon raqam<input name="phone" type="tel" required value="${escapeHtml(cust?.phone || '')}" placeholder="+998 90 123 45 67" /></label>
+          </div>
+          <label>Yetkazib berish manzili<input name="address" required value="${escapeHtml(cust?.address || '')}" placeholder="Tuman, ko‘cha, uy raqami" /></label>
+          <button type="submit" class="btn-primary" style="width:100%">Buyurtmani tasdiqlash ✓</button>
+        </form>
+      `);
+
+      $("#checkoutForm").addEventListener("submit", e => {
+        e.preventDefault();
+        const fd = Object.fromEntries(new FormData(e.currentTarget).entries());
+        const orders = readLS("db_orig_orders", []);
+        const newOrder = {
+          id: "DB-" + Date.now().toString().slice(-5),
+          date: new Date().toLocaleString("uz-UZ"),
+          customer: fd.name,
+          phone: fd.phone,
+          address: fd.address,
+          total: subtotal,
+          items: state.cart,
+          status: "Yangi — Fermer tayyorlamoqda"
+        };
+        orders.unshift(newOrder);
+        saveLS("db_orig_orders", orders);
+        state.wallet += earnCashback;
+        saveLS("db_orig_wallet", state.wallet);
+        state.cart = [];
+        saveLS("db_orig_cart", state.cart);
+        updateHeaderBadges();
+        openModal(`
+          <div style="text-align:center;padding:20px 0">
+            <div style="font-size:50px">🎉</div>
+            <h2>Buyurtma qabul qilindi!</h2>
+            <p>Buyurtma raqami: <b>${newOrder.id}</b><br>Hamyoningizga <b>+${fmt(earnCashback)} keshbek</b> qo‘shildi.</p>
+            <button type="button" class="btn-primary" onclick="closeModal();openCustomerPage()">Buyurtmalarimni ko‘rish →</button>
+          </div>
+        `);
+      });
+    }
+
+    function changeQty(id, delta) {
+      const item = state.cart.find(x => x.id === id);
+      if (item) item.qty += delta;
+      state.cart = state.cart.filter(x => x.qty > 0);
+      saveLS("db_orig_cart", state.cart);
+      updateHeaderBadges();
+      openCartModal();
+    }
+
+    function openAiModal() {
+      openModal(`
+        <span class="sec-kicker">✨ SUN’IY INTELLEKT MASLAHATCHISI</span>
+        <h2>AI Savat Yordamchisi</h2>
+        <p style="color:var(--muted);font-size:13px">Byudjetingizni kiriting — AI sizga eng foydali meva-sabzavotlar to‘plamini hisoblab beradi.</p>
+        <form class="form-grid" id="aiForm">
+          <label>Byudjetingiz (so‘mda)<input type="number" id="aiBudget" value="75000" min="15000" required /></label>
+          <button type="submit" class="btn-primary">Aqlli savat tuzish →</button>
+        </form>
+        <div id="aiResultBox" style="margin-top:16px"></div>
+      `);
+
+      $("#aiForm").addEventListener("submit", e => {
+        e.preventDefault();
+        const budget = Number($("#aiBudget").value) || 60000;
+        const sorted = [...products].sort((a,b) => a.price - b.price);
+        let sum = 0, picked = [];
+        for (const p of sorted) {
+          if (sum + p.price <= budget) {
+            picked.push(p);
+            sum += p.price;
+          }
+        }
+        $("#aiResultBox").innerHTML = `
+          <div style="background:var(--emerald-light);padding:16px;border-radius:14px">
+            <b>Tavsiya etilgan mahsulotlar (${picked.length} xil):</b>
+            <ul style="margin:8px 0;padding-left:18px;font-size:13px">
+              ${picked.map(x => `<li>${escapeHtml(x.name)} — <b>${fmt(x.price)}</b> (${escapeHtml(x.region)}, ${escapeHtml(x.quantity)})</li>`).join("")}
+            </ul>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+              <b>Jami: ${fmt(sum)}</b>
+              <button type="button" class="btn-primary" id="aiAddAllBtn">Hammasini savatga qo‘shish</button>
+            </div>
+          </div>
+        `;
+        $("#aiAddAllBtn").addEventListener("click", () => {
+          picked.forEach(p => addToCart(p.id, 1));
+          openCartModal();
+        });
+      });
+    }
+
+    function renderTenders() {
+      $("#tenderBoardList").innerHTML = state.tenders.slice(0, 3).map(t => `
+        <div class="tender-item">
+          <div>
+            <b>${escapeHtml(t.title)}</b>
+            <small>📍 ${escapeHtml(t.region)} · Buyurtmachi: ${escapeHtml(t.buyer)}</small>
+          </div>
+          <a href="tel:${escapeHtml(t.phone)}" class="btn-gold" style="padding:8px 14px;font-size:12px">📞 ${escapeHtml(t.phone)}</a>
+        </div>
+      `).join("");
+    }
+
+    $("#openTenderModalBtn").addEventListener("click", () => {
+      openModal(`
+        <h2>⚖️ Ulgurji xarid e’loni qoldirish</h2>
+        <form class="form-grid" id="tenderForm">
+          <label>Qanday mahsulot va qancha miqdorda kerak?<input name="title" required placeholder="Masalan: 1 tonna eksportbop uzum" /></label>
+          <div class="form-row">
+            <label>Hudud<input name="region" required placeholder="Toshkent" /></label>
+            <label>Ism yoki tashkilot<input name="buyer" required placeholder="Karimov A." /></label>
+          </div>
+          <label>Telefon raqam<input name="phone" type="tel" required placeholder="+998 90 123 45 67" /></label>
+          <button type="submit" class="btn-primary">E’lonni joylashtirish →</button>
+        </form>
+      `);
+      $("#tenderForm").addEventListener("submit", e => {
+        e.preventDefault();
+        const d = Object.fromEntries(new FormData(e.currentTarget).entries());
+        state.tenders.unshift({ id: Date.now(), ...d });
+        saveLS("db_orig_tenders", state.tenders);
+        renderTenders();
+        closeModal();
+        toast("📣 Ulgurji e’loningiz taxtaga joylandi!");
+      });
+    });
+
+    // Events
+    $("#brandHomeLink").addEventListener("click", switchToMarket);
+    $("#searchForm").addEventListener("submit", e => {
+      e.preventDefault();
+      switchToMarket();
+      state.query = $("#searchInput").value.trim();
+      state.region = $("#regionSelect").value;
+      renderCatalog();
+      $("#katalog").scrollIntoView({ behavior: "smooth" });
+    });
+    $("#searchInput").addEventListener("input", e => {
+      switchToMarket();
+      state.query = e.target.value.trim();
+      renderCatalog();
+    });
+    $("#regionSelect").addEventListener("change", e => {
+      switchToMarket();
+      state.region = e.target.value;
+      renderCatalog();
+    });
+    $("#sortSelect").addEventListener("change", e => { state.sort = e.target.value; renderCatalog(); });
+    $("#maxPriceInput").addEventListener("input", e => { state.maxPrice = Number(e.target.value) || 0; renderCatalog(); });
+
+    $("#favFilterBtn").addEventListener("click", () => {
+      state.onlyFav = !state.onlyFav;
+      $("#favFilterBtn").style.background = state.onlyFav ? "var(--emerald)" : "";
+      $("#favFilterBtn").style.color = state.onlyFav ? "#fff" : "";
+      renderCatalog();
+    });
+
+    $("#resetFiltersBtn").addEventListener("click", () => {
+      state.category = "Barchasi"; state.query = ""; state.region = ""; state.maxPrice = 0; state.onlyFav = false;
+      $("#searchInput").value = ""; $("#regionSelect").value = ""; $("#maxPriceInput").value = "";
+      $("#favFilterBtn").style.background = ""; $("#favFilterBtn").style.color = "";
+      document.querySelectorAll(".cat-chip").forEach(c => c.classList.toggle("active", c.dataset.cat === "Barchasi"));
+      renderCatalog();
+    });
+
+    document.querySelectorAll(".cat-chip").forEach(btn => btn.addEventListener("click", () => {
+      state.category = btn.dataset.cat;
+      document.querySelectorAll(".cat-chip").forEach(c => c.classList.toggle("active", c === btn));
+      renderCatalog();
+    }));
+
+    $("#voiceBtn").addEventListener("click", () => {
+      switchToMarket();
+      toast("🎙️ Ovozli qidiruv tinglamoqda...");
+      setTimeout(() => {
+        $("#searchInput").value = "pomidor";
+        state.query = "pomidor";
+        renderCatalog();
+        toast("🔎 'pomidor' natijalari ko‘rsatildi");
+      }, 1200);
+    });
+
+    $("#themeBtn").addEventListener("click", () => {
+      const dark = document.documentElement.getAttribute("data-theme") === "dark";
+      document.documentElement.setAttribute("data-theme", dark ? "light" : "dark");
+      $("#themeBtn").textContent = dark ? "🌙" : "☀️";
+    });
+
+    $("#cartBtn").addEventListener("click", openCartModal);
+    $("#farmerCabinetBtn").addEventListener("click", () => openFarmerPage());
+    $("#customerCabinetBtn").addEventListener("click", () => openCustomerPage());
+    $("#heroFarmerBtn").addEventListener("click", () => openFarmerPage("register"));
+    $("#heroCustomerBtn").addEventListener("click", () => openCustomerPage("register"));
+    $("#openAiBtn").addEventListener("click", e => { e.preventDefault(); openAiModal(); });
+    $("#bentoAiBtn").addEventListener("click", openAiModal);
+    $("#modalClose").addEventListener("click", closeModal);
+    $("#modalBackdrop").addEventListener("click", e => { if (e.target === $("#modalBackdrop")) closeModal(); });
+
+    updateHeaderBadges();
+    renderCatalog();
+    renderTenders();
+  </script>
+</body>
+</html>
